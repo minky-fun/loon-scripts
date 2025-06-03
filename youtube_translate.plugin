@@ -11,9 +11,6 @@
 [mitm]
 hostname = youtubei.googleapis.com
 
-[rewrite]
-^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/next$ script-response-body https://yangmingqi123.github.io/loon-scripts/youtube_comment_translate.js
-
-
-[script]
-youtube_comment_translate.js = type=response,requires-body=true,script-path=https://yangmingqi123.github.io/loon-scripts/youtube_comment_translate.js
+[Script]
+# 插件入口，重写 youtube next 接口请求到你的代理服务器
+^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/next$ url 302 http://your-server-ip:8080
