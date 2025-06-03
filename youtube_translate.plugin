@@ -1,7 +1,7 @@
 #!name=YouTube 评论翻译器（GPT）
 #!desc=拦截并翻译 YouTube 评论为中文，使用 GPT 接口
 #!author=Minky
-#!homepage=https://github.com/yangmingqi123/loon-scripts
+#!homepage=https://github.com/yangmingqi123
 #!icon=https://www.youtube.com/s/desktop/8cfc17a7/img/favicon.ico
 #!version=2025-06-03
 #!date=2025-06-03
