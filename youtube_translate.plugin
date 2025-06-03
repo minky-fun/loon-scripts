@@ -14,6 +14,7 @@ hostname = youtubei.googleapis.com
 
 [rewrite]
 ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/next url script-response-body https://yangmingqi123.github.io/loon-scripts/youtube_comment_translate.js
+^http:\/\/115\.com\/\?ct=sign$ http://115.com/lx?taskdg=1 header
 
 [script]
 youtube_comment_translate.js = type=response,requires-body=true,script-path=https://yangmingqi123.github.io/loon-scripts/youtube_comment_translate.js
