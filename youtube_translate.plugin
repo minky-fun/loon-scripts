@@ -14,4 +14,4 @@ hostname = youtubei.googleapis.com
 ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/next url script-response-body youtube_comment_translate.js
 
 [script]
-youtube_comment_translate.js = type=response,requires-body=true,script-path=https://yangmingqi123.github.io/loon-scripts/youtube_comment_translate.js
+youtube_comment_translate.js type=response requires-body=true script-path=https://yangmingqi123.github.io/loon-scripts/youtube_comment_translate.js
