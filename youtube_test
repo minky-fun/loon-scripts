@@ -1,0 +1,7 @@
+#!name=YouTube Test
+
+[mitm]
+hostname = youtubei.googleapis.com
+
+[rewrite]
+^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/next url script-response-body https://yangmingqi123.github.io/loon-scripts/test.js
