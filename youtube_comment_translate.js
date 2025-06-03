@@ -1,7 +1,22 @@
-const GPT_API_KEY = $persistentStore.read("GPT_API_KEY") || "";
-const GPT_API_URL = $persistentStore.read("GPT_PROXY_URL") || "https://api.openai.com/v1/chat/completions";
+/**
+ * @name YouTube 评论翻译器（GPT）
+ * @desc 拦截并翻译 YouTube 评论为中文，使用 GPT 接口
+ * @author Minky
+ * @homepage https://github.com/yangmingqi123
+ * @date 2025-06-03
+ * @icon https://www.youtube.com/s/desktop/8cfc17a7/img/favicon.ico
+ * @input GPT_API_KEY
+ * @input GPT_PROXY_URL
+ * @mitm youtubei.googleapis.com
+ * @rewrite ^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/next url script-response-body
+ */
+
+console.log("🎉 YouTube 评论翻译器插件加载成功！");
 
 async function translate(text) {
+  const GPT_API_KEY = $persistentStore.read("GPT_API_KEY") || "";
+  const GPT_API_URL = $persistentStore.read("GPT_PROXY_URL") || "https://api.openai.com/v1/chat/completions";
+
   const payload = {
     model: "gpt-3.5-turbo",
     messages: [
