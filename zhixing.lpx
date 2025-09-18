@@ -14,3 +14,4 @@
 
 #开屏广告
 DOMAIN-SUFFIX,suanya.cn,REJECT
+DOMAIN-SUFFIX,dimg09.c-ctrip.com,REJECT-200
