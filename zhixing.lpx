@@ -23,7 +23,7 @@ DOMAIN-SUFFIX,suanya.cn,REJECT
 [script]
 
 #移除开屏页广告
-http-response ^https?:\/\/(m|www)\.ctrip\.com/restapi/soa2/\d+/json/tripAds script-path=https://yangmingqi123.github.io/loon-scripts/zx.js, requires-body=true, timeout=60, tag=微博移除发现页广告
+http-response ^https?:\/\/(m|www)\.ctrip\.com/restapi/soa2/\d+/json/tripAds script-path=https://yangmingqi123.github.io/loon-scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票开屏广告
 
 
 [MITM]
