@@ -1,20 +1,35 @@
+if (!$response.body) {
+    console.log("❌ 无响应体");
+    $done({});
+}
 
-if (!$response.body) $done({});
+const url = $request.url;
+let obj = JSON.parse($response.body);
 
-const url = $request.url; //请求地址
-let obj = JSON.parse($response.body); //请求结果
+console.log("🎯 匹配到携程广告请求：" + url);
 
 if (url.includes("/json/tripAds")) {
-    // 彻底移除所有广告相关数据
+    let adCount = 0;
     if (obj && obj.seats) {
-        obj.seats = []; // 直接清空整个seats数组
+        obj.seats.forEach(seat => {
+            if (seat.ads) adCount += seat.ads.length;
+        });
     }
-
-    // 保持响应结构完整但无广告
+    
+    console.log("📊 原始广告数量：" + adCount + "个");
+    
+    // 移除广告
+    if (obj && obj.seats) {
+        obj.seats = [];
+    }
+    
     obj.code = 200;
     obj.message = "SUCCESS";
-
-    $done({ body: JSON.stringify(obj) });
+    
+    console.log("✅ 广告已成功移除");
+    
+    $done({body: JSON.stringify(obj)});
 } else {
+    console.log("⏭️  非广告请求，跳过处理");
     $done({});
 }
