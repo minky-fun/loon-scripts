@@ -1,17 +1,26 @@
 #!name= 智行火车票去广告
 #!desc= 智行火车去广告beta版 学习开发中....
 #!author= Minky[https://github.com/yangmingqi123]
-#!homepage= https://github.com/yangmingqi123/loon-scripts
 #!icon= https://yangmingqi123.github.io/loon-scripts/zhixing.png
 #!tag = 去广告,火车票
-#!system = iOS
 #!loon_version = 3.2.1(372)
 #!date=2025-09-18 16:01:09
 
-
+#############################################
+; REJECT (返回404和空响应体)
+; REJECT-IMG (返回200和一个 1px GIF 的响应体)
+; REJECT-DICT (返回200和内容为空的 JSON 的响应体)
+; REJECT-ARRY (返回200和一个内容为空的 JSON 数组)
+; REJECT-DROP (拒绝并丢弃请求，且不会返回任何响应。因为部分程序有着十分暴力的重试逻辑，连接失败后会立刻进行重试，导致请求风暴)
+#############################################
 
 [rule]
 
 #开屏广告
 DOMAIN-SUFFIX,suanya.cn,REJECT
-DOMAIN-SUFFIX,dimg09.c-ctrip.com,REJECT-200
+
+
+[script]
+
+#移除开屏页广告
+http-response ^https?://(m|www)\.ctrip\.com/restapi/soa2/\d+/json/tripAds script-path=https://yangmingqi123.github.io/loon-scripts/zx.js, requires-body=true, timeout=60, tag=移除开屏广告
