@@ -19,7 +19,7 @@
 #广告
 DOMAIN-SUFFIX, ctrip.com, REJECT
 URL-REGEX,^https?:\/\/bd-d\.tripcdn\.cn\/images\/0zg4.*\.png,REJECT-TINYGIF
-
+IP-CIDR,183.131.62.35, REJECT
 
 [script]
 
