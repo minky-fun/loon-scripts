@@ -21,6 +21,9 @@ DOMAIN-SUFFIX,suanya.cn,REJECT
 
 
 [script]
+http-response ^https?:\/\/(m|i|mapi|mapi-int)\.(ctrip|trip)\.com\/ restapi\/soa2\/\d+\/.* script-path=https://example.com/sniff_yuyue.js, requires-body=true, timeout=60, tag=携程-嗅探Tab
+http-response ^https?:\/\/.*\.(ctrip|trip)\.com\/.* script-path=https://example.com/sniff_yuyue.js, requires-body=true, timeout=60, tag=携程-兜底嗅探
+
 
 #移除开屏页广告
 http-response ^https?:\/\/(m|www)\.ctrip\.com/restapi/soa2/\d+/json/tripAds script-path=https://yangmingqi123.github.io/loon-scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票开屏广告
