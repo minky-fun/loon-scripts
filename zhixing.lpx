@@ -16,8 +16,8 @@
 
 [rule]
 
-#开屏广告
-DOMAIN-SUFFIX,suanya.cn,REJECT
+#广告
+URL-REGEX,^https?:\/\/bd-d\.tripcdn\.cn\/images\/0zg4.*\.png,REJECT-TINYGIF
 
 
 [script]
