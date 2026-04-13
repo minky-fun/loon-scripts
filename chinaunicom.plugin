@@ -3,7 +3,7 @@
 #!system=ios
 
 [Script]
-http-request ^https?:\/\/.*10010\.com\/.* script-path=chinaunicom_cookie.js, requires-body=false, timeout=10, tag=联通Cookie获取
+http-request ^https?:\/\/.*10010\.com\/.* script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/chinaunicom_cookie.js, requires-body=false, timeout=10, tag=联通Cookie获取
 
 [MITM]
 hostname = %APPEND% *.10010.com
