@@ -1,0 +1,9 @@
+#!name=联通Cookie获取
+#!desc=打开中国联通APP自动获取10010.cookie
+#!system=ios
+
+[Script]
+http-request ^https?:\/\/.*10010\.com\/.* script-path=chinaunicom_cookie.js, requires-body=false, timeout=10, tag=联通Cookie获取
+
+[MITM]
+hostname = %APPEND% *.10010.com
