@@ -1,7 +1,7 @@
 #!name=PingMe(Loon)
 #!desc=PingMe 抓参 + 自动签到 + 视频奖励（外链脚本版）
-#!author=OpenAI
-#!homepage=https://chatgpt.com
+#!author=Minky
+#!homepage=https://github.com/yangmingqi123
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Checkmark.png
 
 [Script]
