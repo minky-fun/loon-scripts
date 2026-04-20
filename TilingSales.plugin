@@ -23,13 +23,6 @@
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Resource\/CommentAd\/show - reject-dict
 ^https?:\/\/rg829\.8f3m24\.com\/v0\.1\/public\/codepush\/update_check - reject-dict
 
-[Script]
-http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Resource\/Config\/getNav requires-body=true,script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js,tag=瓜子影视_getNav
-http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/barsPlayAdInfo requires-body=true,script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js,tag=瓜子影视_barsPlayAdInfo
-http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/playAdInfo requires-body=true,script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js,tag=瓜子影视_playAdInfo
-http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/IndexPlay\/vodAdvertisement requires-body=true,script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js,tag=瓜子影视_vodAdvertisement
-http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Resource\/Vod\/showOne requires-body=true,script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js,tag=瓜子影视_showOne
-http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Resource\/Vod\/vurlDetail requires-body=true,script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js,tag=瓜子影视_vurlDetail
 
 [MITM]
 hostname = api.ainitpz.com, api.4hnovel.com, api.1000gxf.com, rg829.8f3m24.com
