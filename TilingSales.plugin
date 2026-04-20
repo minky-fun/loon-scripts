@@ -1,7 +1,7 @@
 #!name = 瓜子影视净化
 #!author = Minky
 #!update = 2026-4-19
-#!desc = 瓜子影视去广告/净化，适用于 Loon
+#!desc = 瓜子影视去广告/净化，适用于 Loon11111
 
 [Rewrite]
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/splashInfo - reject-dict
