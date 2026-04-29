@@ -1,0 +1,9 @@
+#!name=菜鸟请求头抓取
+#!desc=抓取菜鸟 package dyn list 接口请求头，并保存到 BoxJS / Loon 持久化存储
+#!author=Minky
+
+[Script]
+http-request ^https:\/\/caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.pcs\.packageservice\.querypackagedynlist\.cn\/1\.0 script-path=https://你的脚本地址/cainiao_headers.js, requires-body=false, timeout=10, tag=菜鸟请求头抓取
+
+[MITM]
+hostname = caps-mtop.cainiao.com
