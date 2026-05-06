@@ -7,7 +7,6 @@
 [Rewrite]
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/splashInfo - reject-dict
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/noticeInfo - reject-dict
-^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/IndexList\/homeFloatAd - reject-dict
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/activityInfo - reject-dict
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/skitAdInfo - reject-dict
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/countPopTotal - reject-dict
