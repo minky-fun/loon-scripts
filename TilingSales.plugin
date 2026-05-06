@@ -4,7 +4,25 @@
 #!desc = 瓜子影视去广告/净化，适用于 Loon
 #!icon = https://www.gzgztx.com/uploads/images/20260427/931d20c2b22eafb417bea6bbdbda2f83.png
 
-
+[Rewrite]
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/splashInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/noticeInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/IndexList\/homeFloatAd - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/activityInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/skitAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/countPopTotal - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/barsUserAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/ad\/config - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/vajraInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/bannerInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/bardCacheAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/barsIndexAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/comicAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/liveEventAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/novelAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/sportAdInfo - reject-dict
+^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Resource\/CommentAd\/show - reject-dict
+^https?:\/\/rg829\.8f3m24\.com\/v0\.1\/public\/codepush\/update_check - reject-dict
 
 [Script]
 http-response ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Resource\/Config\/getNav script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/TilingSales_getNav.js, requires-body=true, timeout=60
