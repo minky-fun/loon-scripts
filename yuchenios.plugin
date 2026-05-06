@@ -1,6 +1,7 @@
 #!name=雨辰ios签到
 #!desc=雨辰ios 自动登录签到
 #!system=ios
+#!icon=https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/yuchenios.png
 
 [Script]
 cron "30 20 * * *" script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/yuchenios.js, timeout=60, tag=雨辰ios签到
