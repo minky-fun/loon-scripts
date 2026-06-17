@@ -3,6 +3,7 @@
 #!update = 2026-5-6
 #!desc = 瓜子影视去广告/净化，适用于 Loon
 #!icon = https://www.gzgztx.com/uploads/images/20260427/931d20c2b22eafb417bea6bbdbda2f83.png
+#!tag=minky
 
 [Rewrite]
 ^https?:\/\/api\.(ainitpz|4hnovel|1000gxf)\.com\/App\/Ad\/splashInfo reject-dict

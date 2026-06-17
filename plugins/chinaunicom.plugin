@@ -4,6 +4,7 @@
 #!author=Minky
 #!homepage=https://github.com/minky-fun
 #!icon=https://pp.myapp.com/ma_icon/0/icon_3722_1776691121/256
+#!tag=minky
 
 [Script]
 http-request ^https:\/\/m\.client\.10010\.com\/mobileserviceNine\/api\/v1\/index\/queryCfig(\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/chinaunicom_cookie.js, requires-body=false, timeout=10, tag=联通Cookie获取

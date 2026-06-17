@@ -5,6 +5,7 @@
 #!openUrl=https://www.hlwxx.com，https://heiliao.com
 #!homepage=https://github.com/ZenmoFeiShi
 #!icon=
+#!tag=minky
 
 [Rewrite]
 ^https?:\/\/stats\.kwvprfcr\.xyz reject

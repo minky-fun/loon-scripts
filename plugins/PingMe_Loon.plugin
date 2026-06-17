@@ -3,6 +3,7 @@
 #!author=Minky
 #!homepage=https://github.com/minky-fun
 #!icon=http://pic.962.net/up/2024-7/2024724107193942.png
+#!tag=minky
 
 [Script]
 http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://cdn.jsdelivr.net/gh/minky-fun/loon-scripts@main/scripts/PingMe_Loon.js, requires-body=false, timeout=60, tag=PingMe抓参
