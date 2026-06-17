@@ -1,7 +1,31 @@
-# Loon Scripts
+<p align="center">
+  <img src="https://minky-fun.github.io/loon-scripts/assets/ydwx.png" width="88" alt="Loon Scripts">
+</p>
 
-**此仓库仅用于部署 GitHub Pages，不允许任何人使用仓库内容。**  
-**This repository is for GitHub Pages deployment only. Do not use its contents.**
+<h1 align="center">Loon Scripts</h1>
+
+<p align="center">
+  自用 Loon 插件合集 / Personal Loon Plugin Collection
+</p>
+
+<p align="center">
+  <a href="https://minky-fun.github.io/loon-scripts/">
+    <img src="https://img.shields.io/badge/Install-Plugin%20Page-0f6cbd?style=for-the-badge" alt="Install Page">
+  </a>
+  <img src="https://img.shields.io/badge/Loon-Plugins-22a06b?style=for-the-badge" alt="Loon Plugins">
+  <img src="https://img.shields.io/badge/License-MIT-5964e0?style=for-the-badge" alt="MIT License">
+</p>
+
+<p align="center">
+  <a href="https://minky-fun.github.io/loon-scripts/">插件安装页 / Install Page</a>
+  ·
+  <a href="#插件地址--plugin-links">插件地址 / Plugin Links</a>
+  ·
+  <a href="#合规声明--compliance">合规声明 / Compliance</a>
+</p>
+
+> **此仓库仅用于部署 GitHub Pages，不允许任何人使用仓库内容。**  
+> **This repository is for GitHub Pages deployment only. Do not use its contents.**
 
 ## 合规声明 / Compliance
 
