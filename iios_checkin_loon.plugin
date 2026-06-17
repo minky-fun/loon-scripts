@@ -1,6 +1,0 @@
-#!name=iios签到
-#!desc=iios.fun 自动登录签到
-#!system=ios
-
-[Script]
-cron "30 10,11,12,13,20 * * *" script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/iios_checkin_loon.js, timeout=60, tag=iios签到

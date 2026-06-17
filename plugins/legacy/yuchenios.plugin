@@ -4,4 +4,4 @@
 #!icon=https://raw.githubusercontent.com/Sliverkiss/QuantumultX/main/icon/yuchenios.png
 
 [Script]
-cron "30 20 * * *" script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/yuchenios.js, timeout=60, tag=雨辰ios签到
+cron "30 20 * * *" script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/yuchenios.js, timeout=60, tag=雨辰ios签到
