@@ -1,3 +1,6 @@
+**🚫 此仓库仅用于部署 GitHub Pages，不允许任何人使用仓库内容！**  
+**🚫 THIS REPOSITORY IS FOR GITHUB PAGES DEPLOYMENT ONLY. DO NOT USE ITS CONTENTS!**
+
 # Loon Scripts
 
 个人自用 Loon 插件与脚本仓库，主要用于 GitHub Pages 和 raw 文件分发。
