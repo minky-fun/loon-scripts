@@ -2,7 +2,7 @@
 #!desc=一点万象 App 自动签到：先打开 App 进入签到页抓取参数，之后每天自动签到。
 #!author=ZenmoFeiShi / Minky
 #!homepage=https://github.com/ZenmoFeiShi/Qx
-#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Star.png
+#!icon=https://minky-fun.github.io/loon-scripts/assets/ydwx.png
 #!tag=minky
 
 [Script]
