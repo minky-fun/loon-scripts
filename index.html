@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loon Scripts</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f9;
+        --panel: #ffffff;
+        --text: #1f2933;
+        --muted: #667085;
+        --line: #d9dee7;
+        --link: #0f6cbd;
+        --head: #eef2f7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 40px auto;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .tip {
+        margin: 0 0 24px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 860px;
+      }
+
+      th,
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--head);
+        font-size: 13px;
+        font-weight: 700;
+        color: #344054;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 13px;
+        color: #344054;
+        word-break: break-all;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+        word-break: break-all;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Loon Scripts</h1>
+      <p class="tip">此页面仅用于展示插件目录和安装地址。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>插件名称</th>
+              <th>插件目录</th>
+              <th>安装地址</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>黑料网净化</td>
+              <td><code>plugins/hlwxx_remove_ads.lpx</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/hlwxx_remove_ads.lpx">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/hlwxx_remove_ads.lpx</a></td>
+            </tr>
+            <tr>
+              <td>智行火车票去广告</td>
+              <td><code>plugins/zhixing.lpx</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/zhixing.lpx">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/zhixing.lpx</a></td>
+            </tr>
+            <tr>
+              <td>菜鸟请求头抓取</td>
+              <td><code>plugins/CainiaoHeaders.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/CainiaoHeaders.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/CainiaoHeaders.plugin</a></td>
+            </tr>
+            <tr>
+              <td>芒果tv解锁会员</td>
+              <td><code>plugins/MangoTV_Vip.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/MangoTV_Vip.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/MangoTV_Vip.plugin</a></td>
+            </tr>
+            <tr>
+              <td>PingMe(Loon)</td>
+              <td><code>plugins/PingMe_Loon.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/PingMe_Loon.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/PingMe_Loon.plugin</a></td>
+            </tr>
+            <tr>
+              <td>瓜子影视净化</td>
+              <td><code>plugins/TilingSales.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/TilingSales.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/TilingSales.plugin</a></td>
+            </tr>
+            <tr>
+              <td>联通Cookie获取</td>
+              <td><code>plugins/chinaunicom.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/chinaunicom.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/chinaunicom.plugin</a></td>
+            </tr>
+            <tr>
+              <td>iios签到</td>
+              <td><code>plugins/iios_checkin_loon.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/iios_checkin_loon.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/iios_checkin_loon.plugin</a></td>
+            </tr>
+            <tr>
+              <td>一点万象签到</td>
+              <td><code>plugins/mixc_signin_loon.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/mixc_signin_loon.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/mixc_signin_loon.plugin</a></td>
+            </tr>
+            <tr>
+              <td>雨辰ios签到</td>
+              <td><code>plugins/yuchenios.plugin</code></td>
+              <td><a href="https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/yuchenios.plugin">https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/yuchenios.plugin</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
