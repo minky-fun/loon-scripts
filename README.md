@@ -1,5 +1,5 @@
-**🚫 此仓库仅用于部署 GitHub Pages，不允许任何人使用仓库内容！**  
-**🚫 THIS REPOSITORY IS FOR GITHUB PAGES DEPLOYMENT ONLY. DO NOT USE ITS CONTENTS!**
+**此仓库仅用于部署 GitHub Pages，不允许任何人使用仓库内容。**  
+**THIS REPOSITORY IS FOR GITHUB PAGES DEPLOYMENT ONLY. DO NOT USE ITS CONTENTS.**
 
 # Loon Scripts
 
@@ -62,4 +62,5 @@
 - 新增 Loon 插件优先使用 `.lpx` 格式。
 - 插件文件保持在仓库根目录，避免破坏已有 raw 和 GitHub Pages 链接。
 - 不提交 Cookie、Token、Authorization、账号 ID、手机号等私人数据。
+- 个人日历等非插件资源统一放在 README 的“其他文件”分类中。
 - README 只记录公开文件和用途，不写入个人参数。

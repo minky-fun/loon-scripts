@@ -8,5 +8,5 @@
 http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://cdn.jsdelivr.net/gh/yangmingqi123/loon-scripts@main/PingMe_Loon.js, requires-body=false, timeout=60, tag=PingMe抓参
 cron "30 8,20 * * *" script-path=https://cdn.jsdelivr.net/gh/yangmingqi123/loon-scripts@main/PingMe_Loon.js, timeout=300, tag=PingMe签到
 
-[MITM]
+[Mitm]
 hostname = api.pingmeapp.net

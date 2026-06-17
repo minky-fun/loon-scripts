@@ -1,0 +1,11 @@
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.bak
+box.dat
+*.har
+*.mitm
+node_modules/
