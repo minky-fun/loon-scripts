@@ -1,0 +1,12 @@
+#!name=咪咕视频解锁会员
+#!desc=由 Quantumult X snippet 转换，源规则更新于 2026-05-14。
+#!author=Minky
+#!homepage=https://github.com/yangmingqi123/loon-scripts
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png
+
+[Script]
+http-request ^https?:\/\/(play|play-pre|v|v[0-9]?-sc|vmesh|app-sc|vms-sc|display(-sc)?|common-sc|program-sc|d[0-9]-sc|fs-sc|fsdv-sc|mp-user|recommend-dy|chat|chat-wx|public-deliver[0-9]?|public-operbiz[0-9]?|public-img)\.miguvideo\.com\/.+ script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/migu_vip.js, timeout=60, tag=咪咕视频解锁会员-视频域名
+http-request ^https?:\/\/(passport|uem|push|jadeite|jadeiteapp|hound|feedback|rcsdk)\.migu\.cn\/.+ script-path=https://raw.githubusercontent.com/ZenmoFeiShi/Qx/refs/heads/main/migu_vip.js, timeout=60, tag=咪咕视频解锁会员-账号域名
+
+[Mitm]
+hostname = *.miguvideo.com, *.migu.cn
