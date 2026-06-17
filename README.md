@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://minky-fun.github.io/loon-scripts/assets/loon_scripts_logo.jpg" width="180" alt="Loon Scripts">
+  <img src="https://minky-fun.github.io/loon-scripts/assets/loon_scripts_logo.png" width="180" alt="Loon Scripts">
 </p>
 
 <h1 align="center">Loon Scripts</h1>
