@@ -4,8 +4,8 @@
 #!icon=https://pp.myapp.com/ma_icon/0/icon_11551760_1777010595/256
 
 [Script]
-http-request ^https:\/\/caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.pcs\.packageservice\.querypackagedynlist\.cn\/1\.0 script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/cainiao_headers.js, requires-body=false, timeout=10, tag=菜鸟请求头抓取
-http-response ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cnmember\.customer\.autologin\/1\.0 script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/cainiao_refresh_token.js, requires-body=true, timeout=10, tag=菜鸟refreshToken抓取
+http-request ^https:\/\/caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.pcs\.packageservice\.querypackagedynlist\.cn\/1\.0 script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/cainiao_headers.js, requires-body=false, timeout=10, tag=菜鸟请求头抓取
+http-response ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cnmember\.customer\.autologin\/1\.0 script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/cainiao_refresh_token.js, requires-body=true, timeout=10, tag=菜鸟refreshToken抓取
 
 [Mitm]
 hostname = caps-mtop.cainiao.com

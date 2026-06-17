@@ -2,11 +2,11 @@
 #!desc=打开中国联通APP自动获取10010.cookie
 #!system=ios
 #!author=Minky
-#!homepage=https://github.com/yangmingqi123
+#!homepage=https://github.com/minky-fun
 #!icon=https://pp.myapp.com/ma_icon/0/icon_3722_1776691121/256
 
 [Script]
-http-request ^https:\/\/m\.client\.10010\.com\/mobileserviceNine\/api\/v1\/index\/queryCfig(\?.*)?$ script-path=https://raw.githubusercontent.com/yangmingqi123/loon-scripts/main/chinaunicom_cookie.js, requires-body=false, timeout=10, tag=联通Cookie获取
+http-request ^https:\/\/m\.client\.10010\.com\/mobileserviceNine\/api\/v1\/index\/queryCfig(\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/chinaunicom_cookie.js, requires-body=false, timeout=10, tag=联通Cookie获取
 
 [Mitm]
 hostname = %APPEND% m.client.10010.com

@@ -1,12 +1,12 @@
 #!name=PingMe(Loon)
 #!desc=PingMe 抓参 + 自动签到 + 视频奖励（外链脚本版）
 #!author=Minky
-#!homepage=https://github.com/yangmingqi123
+#!homepage=https://github.com/minky-fun
 #!icon=http://pic.962.net/up/2024-7/2024724107193942.png
 
 [Script]
-http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://cdn.jsdelivr.net/gh/yangmingqi123/loon-scripts@main/PingMe_Loon.js, requires-body=false, timeout=60, tag=PingMe抓参
-cron "30 8,20 * * *" script-path=https://cdn.jsdelivr.net/gh/yangmingqi123/loon-scripts@main/PingMe_Loon.js, timeout=300, tag=PingMe签到
+http-request ^https:\/\/api\.pingmeapp\.net\/app\/queryBalanceAndBonus script-path=https://cdn.jsdelivr.net/gh/minky-fun/loon-scripts@main/PingMe_Loon.js, requires-body=false, timeout=60, tag=PingMe抓参
+cron "30 8,20 * * *" script-path=https://cdn.jsdelivr.net/gh/minky-fun/loon-scripts@main/PingMe_Loon.js, timeout=300, tag=PingMe签到
 
 [Mitm]
 hostname = api.pingmeapp.net
