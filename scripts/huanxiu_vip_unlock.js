@@ -8,13 +8,17 @@
 6. 如任何单位或个人认为本脚本可能侵犯其合法权益，请提供有效身份证明和权属证明并联系处理；核实后将及时删除或调整相关内容。
 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 */
-// 开关参数来自 Loon 插件 [Argument] 区块。
-const { sipActive, vipActive, trialVip } = $arguments;
+// 开关参数来自 Loon 注入的 $argument 字符串。
+const argument = $argument;
+const params = new URLSearchParams(argument);
+const sipActive = params.get('sipActive') === 'true';
+const vipActive = params.get('vipActive') === 'true';
+const trialVip = params.get('trialVip') === 'true';
 const obj = JSON.parse($response.body);
 const date = new Date();
 
 console.log('[幻休 VIP 解锁] 开始执行');
-console.log(`[幻休 VIP 解锁] 原始参数: ${JSON.stringify($arguments)}`);
+console.log(`[幻休 VIP 解锁] 原始参数: ${argument}`);
 console.log(`[幻休 VIP 解锁] 开关解析: sipActive=${sipActive}, vipActive=${vipActive}, trialVip=${trialVip}`);
 console.log(`[幻休 VIP 解锁] 原始字段: sipActive=${obj.data.sipActive}, vipActive=${obj.data.vipActive}, trialVip=${obj.data.trialVip}, sipExpireTime=${obj.data.sipExpireTime}, familySipExpireTime=${obj.data.familySipExpireTime}, vipExpireTime=${obj.data.vipExpireTime}, familyVipExpireTime=${obj.data.familyVipExpireTime}`);
 
