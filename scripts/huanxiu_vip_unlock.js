@@ -11,9 +11,9 @@
 // 开关参数格式：sipActive=true&vipActive=true&trialVip=true
 const argument = typeof $argument === 'string' ? $argument : '';
 const params = new URLSearchParams(argument);
-const sipActive = params.get('sipActive') !== 'false';
-const vipActive = params.get('vipActive') !== 'false';
-const trialVip = params.get('trialVip') !== 'false';
+const sipActive = params.get('sipActive') === 'true';
+const vipActive = params.get('vipActive') === 'true';
+const trialVip = params.get('trialVip') === 'true';
 const obj = JSON.parse($response.body);
 const date = new Date();
 
@@ -24,10 +24,16 @@ const expireTime = date.toISOString().slice(0, 10);
 obj.data.sipActive = sipActive;
 obj.data.vipActive = vipActive;
 obj.data.trialVip = trialVip;
-obj.data.sipExpireTime = expireTime;
-obj.data.familySipExpireTime = expireTime;
-obj.data.vipExpireTime = expireTime;
-obj.data.familyVipExpireTime = expireTime;
+
+if (sipActive) {
+  obj.data.sipExpireTime = expireTime;
+  obj.data.familySipExpireTime = expireTime;
+}
+
+if (vipActive) {
+  obj.data.vipExpireTime = expireTime;
+  obj.data.familyVipExpireTime = expireTime;
+}
 
 $done({
   body: JSON.stringify(obj)
