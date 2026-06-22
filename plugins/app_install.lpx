@@ -1,0 +1,13 @@
+#!name=应用安装
+#!desc=App Store 低版本应用安装、已购下架应用安装
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/assets/loon_scripts_logo.png
+#!tag=minky
+
+[Script]
+应用接口 = type=http-request,pattern=https://apple-api.com,requires-body=1,max-size=-1,binary-body-mode=0,timeout=30,debug=1,script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/AppleStoreAPI.js
+应用安装 = type=http-request,pattern=https:\/\/xiaobai\.app,requires-body=0,script-path=https://raw.githubusercontent.com/githubdulong/Script/master/installapp.js
+
+[Mitm]
+hostname = %APPEND% apple-api.com, xiaobai.app
