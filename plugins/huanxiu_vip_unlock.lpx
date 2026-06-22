@@ -11,7 +11,7 @@ vipActive = switch,true,tag=启用 VIP,desc=控制响应中的 vipActive 字段
 trialVip = switch,true,tag=启用试用 VIP,desc=控制响应中的 trialVip 字段
 
 [Script]
-http-response ^https:\/\/api\.shaolinzen\.com\/user\/v1\/info script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/huanxiu_vip_unlock.js, requires-body=true, argument=[{sipActive},{vipActive},{trialVip}], timeout=60, tag=幻休 VIP 解锁
+http-response ^https:\/\/api\.shaolinzen\.com\/user\/v1\/info script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/huanxiu_vip_unlock.js, requires-body=true, timeout=60, tag=幻休 VIP 解锁
 
 [Mitm]
 hostname = api.shaolinzen.com
