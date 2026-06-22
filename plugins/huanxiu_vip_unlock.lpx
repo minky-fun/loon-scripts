@@ -2,7 +2,7 @@
 #!desc=修改 user/v1/info 响应中的会员状态和到期时间。
 #!author=Minky
 #!homepage=https://github.com/yangmingqi123/loon-scripts
-#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png
+#!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ce/92/d9/ce92d979-55d2-bd27-cee1-1fc77f3c35ff/AppIconEffect-0-0-1x_U007ephone-0-1-0-sRGB-85-220.png/512x512bb.jpg
 #!tag=minky
 
 [Script]
