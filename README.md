@@ -51,6 +51,7 @@ This repository is licensed under the MIT License. You may study, modify, and di
 | 插件名称 / Plugin | 安装地址 / Install |
 |---|---|
 | 黑料网净化 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/hlwxx_remove_ads.lpx) |
+| 少林禅会员信息修改 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/shaolinzen_vip.lpx) |
 | 智行火车票去广告 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/zhixing.lpx) |
 | 菜鸟请求头抓取 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/CainiaoHeaders.plugin) |
 | 芒果tv解锁会员 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/MangoTV_Vip.plugin) |

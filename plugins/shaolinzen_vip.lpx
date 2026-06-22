@@ -1,0 +1,12 @@
+#!name=少林禅会员信息修改
+#!desc=修改 user/v1/info 响应中的会员状态和到期时间。
+#!author=Minky
+#!homepage=https://github.com/yangmingqi123/loon-scripts
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png
+#!tag=minky
+
+[Script]
+http-response ^https:\/\/api\.shaolinzen\.com\/user\/v1\/info script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/shaolinzen_vip.js, requires-body=true, timeout=60, tag=少林禅会员信息修改
+
+[Mitm]
+hostname = api.shaolinzen.com
