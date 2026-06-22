@@ -4,9 +4,10 @@
 #!homepage=https://github.com/yangmingqi123/loon-scripts
 #!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ce/92/d9/ce92d979-55d2-bd27-cee1-1fc77f3c35ff/AppIconEffect-0-0-1x_U007ephone-0-1-0-sRGB-85-220.png/512x512bb.jpg
 #!tag=minky
+#!arguments=sipActive=true&vipActive=true&trialVip=true
 
 [Script]
-http-response ^https:\/\/api\.shaolinzen\.com\/user\/v1\/info script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/huanxiu_vip_unlock.js, requires-body=true, argument=sipActive=true&vipActive=true&trialVip=true, timeout=60, tag=幻休 VIP 解锁
+http-response ^https:\/\/api\.shaolinzen\.com\/user\/v1\/info script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/huanxiu_vip_unlock.js, requires-body=true, argument={{{arguments}}}, timeout=60, tag=幻休 VIP 解锁
 
 [Mitm]
 hostname = api.shaolinzen.com
