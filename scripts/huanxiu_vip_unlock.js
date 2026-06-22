@@ -17,9 +17,16 @@ const trialVip = params.get('trialVip') === 'true';
 const obj = JSON.parse($response.body);
 const date = new Date();
 
+console.log('[幻休 VIP 解锁] 开始执行');
+console.log(`[幻休 VIP 解锁] 原始参数: ${argument}`);
+console.log(`[幻休 VIP 解锁] 开关解析: sipActive=${sipActive}, vipActive=${vipActive}, trialVip=${trialVip}`);
+console.log(`[幻休 VIP 解锁] 原始字段: sipActive=${obj.data.sipActive}, vipActive=${obj.data.vipActive}, trialVip=${obj.data.trialVip}, sipExpireTime=${obj.data.sipExpireTime}, familySipExpireTime=${obj.data.familySipExpireTime}, vipExpireTime=${obj.data.vipExpireTime}, familyVipExpireTime=${obj.data.familyVipExpireTime}`);
+
 date.setFullYear(date.getFullYear() + 1);
 
 const expireTime = date.toISOString().slice(0, 10);
+
+console.log(`[幻休 VIP 解锁] 计算到期时间: ${expireTime}`);
 
 obj.data.sipActive = sipActive;
 obj.data.vipActive = vipActive;
@@ -28,12 +35,21 @@ obj.data.trialVip = trialVip;
 if (sipActive) {
   obj.data.sipExpireTime = expireTime;
   obj.data.familySipExpireTime = expireTime;
+  console.log('[幻休 VIP 解锁] SIP 开关开启，已替换 sipExpireTime 与 familySipExpireTime');
+} else {
+  console.log('[幻休 VIP 解锁] SIP 开关关闭，跳过 sipExpireTime 与 familySipExpireTime');
 }
 
 if (vipActive) {
   obj.data.vipExpireTime = expireTime;
   obj.data.familyVipExpireTime = expireTime;
+  console.log('[幻休 VIP 解锁] VIP 开关开启，已替换 vipExpireTime 与 familyVipExpireTime');
+} else {
+  console.log('[幻休 VIP 解锁] VIP 开关关闭，跳过 vipExpireTime 与 familyVipExpireTime');
 }
+
+console.log(`[幻休 VIP 解锁] 最终字段: sipActive=${obj.data.sipActive}, vipActive=${obj.data.vipActive}, trialVip=${obj.data.trialVip}, sipExpireTime=${obj.data.sipExpireTime}, familySipExpireTime=${obj.data.familySipExpireTime}, vipExpireTime=${obj.data.vipExpireTime}, familyVipExpireTime=${obj.data.familyVipExpireTime}`);
+console.log('[幻休 VIP 解锁] 执行完成');
 
 $done({
   body: JSON.stringify(obj)
