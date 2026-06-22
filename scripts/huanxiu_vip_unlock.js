@@ -8,12 +8,12 @@
 6. 如任何单位或个人认为本脚本可能侵犯其合法权益，请提供有效身份证明和权属证明并联系处理；核实后将及时删除或调整相关内容。
 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 */
-// 开关参数来自 Loon 注入的 $argument 字符串。
+// 开关参数来自 Loon 注入的 $argument 数组字符串。
 const argument = $argument;
-const params = new URLSearchParams(argument);
-const sipActive = params.get('sipActive') === 'true';
-const vipActive = params.get('vipActive') === 'true';
-const trialVip = params.get('trialVip') === 'true';
+const argumentValues = JSON.parse(argument);
+const sipActive = argumentValues[0] === true;
+const vipActive = argumentValues[1] === true;
+const trialVip = argumentValues[2] === true;
 const obj = JSON.parse($response.body);
 const date = new Date();
 
