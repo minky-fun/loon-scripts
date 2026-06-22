@@ -1,3 +1,4 @@
+// 仅供学习交流，请勿用于商业或非法用途。
 if (!$response.body) {
     console.log("❌ 无响应体");
     $done({});

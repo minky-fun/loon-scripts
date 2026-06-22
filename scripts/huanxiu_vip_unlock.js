@@ -1,3 +1,4 @@
+// 仅供学习交流，请勿用于商业或非法用途。
 const obj = JSON.parse($response.body);
 const date = new Date();
 

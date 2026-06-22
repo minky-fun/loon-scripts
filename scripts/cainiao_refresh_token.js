@@ -1,3 +1,4 @@
+// 仅供学习交流，请勿用于商业或非法用途。
 /**
  * 菜鸟 refreshToken 抓取脚本
  * 文件名：cainiao_refresh_token.js

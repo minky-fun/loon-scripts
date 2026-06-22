@@ -1,3 +1,4 @@
+// 仅供学习交流，请勿用于商业或非法用途。
 const API_BASE = 'https://iios-api.suil.dpdns.org';
 const API_SECRET = '5SAi3saB9A7pDRIoKdrmB1HYnQq7exe2';
 const START_URL = API_BASE + '/iios/checkin_login_async';
