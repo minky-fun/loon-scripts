@@ -7,7 +7,7 @@
 
 [Script]
 http-request ^https:\/\/apple-api\.com script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/AppleStoreAPI.js, requires-body=true, timeout=30, tag=应用接口
-http-request ^https:\/\/xiaobai\.app script-path=https://raw.githubusercontent.com/githubdulong/Script/master/installapp.js, requires-body=false, timeout=60, tag=应用安装
+http-request ^https:\/\/xiaobai\.app script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/installapp.js, requires-body=false, timeout=60, tag=应用安装
 
 [Mitm]
 hostname = %APPEND% apple-api.com, xiaobai.app
