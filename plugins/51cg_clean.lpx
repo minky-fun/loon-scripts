@@ -18,4 +18,4 @@ URL-REGEX,^https?:\/\/[^\/]*jqgjyipzs\.com\/,REJECT
 URL-REGEX,^https?:\/\/[^\/]+\/lottery\/worldcup\/,REJECT
 
 [Mitm]
-hostname = p25.qrnrshy.com, p11.gmjiphps.cc, *.gmjiphps.cc, bpi4.gldnbphxc.cc, bpi5.glrxdaso.cc, *.gldnbphxc.cc, *.glrxdaso.cc, pic.myedua.cn, *.myedua.cn, pic.fkqwky.cn, pic.sfbjdu.cn, hlsapp.fkqwky.cn, hlsapp.sfbjdu.cn, raw.githubusercontent.com
+hostname = *.bycuehg.com,*.cbgzdmo.com, *.qrnrshy.com, p11.gmjiphps.cc, *.gmjiphps.cc, bpi4.gldnbphxc.cc, bpi5.glrxdaso.cc, *.gldnbphxc.cc, *.glrxdaso.cc, pic.myedua.cn, *.myedua.cn, pic.fkqwky.cn, pic.sfbjdu.cn, hlsapp.fkqwky.cn, hlsapp.sfbjdu.cn, raw.githubusercontent.com
