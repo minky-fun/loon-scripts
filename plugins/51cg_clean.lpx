@@ -1,0 +1,18 @@
+#!name=51吃瓜净化
+#!desc=51吃瓜视频解锁与广告净化
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/assets/loon_scripts_logo.png
+#!tag=minky
+
+[Script]
+http-response ^https?:\/\/bpi4\.gldnbphxc\.cc\/api\.php\/api\/ script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ghs/51cg.js, requires-body=true, timeout=60, tag=51吃瓜响应净化1
+http-response ^https?:\/\/bpi5\.glrxdaso\.cc\/api\.php\/api\/ script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ghs/51cg.js, requires-body=true, timeout=60, tag=51吃瓜响应净化2
+
+[Rule]
+URL-REGEX,^https?:\/\/[^\/]+\/upload_01\/ads\/,REJECT
+URL-REGEX,^https?:\/\/[^\/]*jqgjyipzs\.com\/,REJECT
+URL-REGEX,^https?:\/\/[^\/]+\/lottery\/worldcup\/,REJECT
+
+[Mitm]
+hostname = p11.gmjiphps.cc, *.gmjiphps.cc, bpi4.gldnbphxc.cc, bpi5.glrxdaso.cc, *.gldnbphxc.cc, *.glrxdaso.cc, pic.myedua.cn, *.myedua.cn, pic.fkqwky.cn, pic.sfbjdu.cn, hlsapp.fkqwky.cn, hlsapp.sfbjdu.cn, raw.githubusercontent.com
