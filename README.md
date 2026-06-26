@@ -62,3 +62,4 @@ This repository is licensed under the MIT License. You may study, modify, and di
 | iios签到 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/iios_checkin_loon.plugin) |
 | 一点万象签到 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/mixc_signin_loon.plugin) |
 | 雨辰ios签到 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/yuchenios.plugin) |
+| WPS签到 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/Wps_sign.lpx) |
