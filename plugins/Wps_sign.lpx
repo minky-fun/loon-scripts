@@ -2,6 +2,8 @@
 #!desc=WPS Cookie 获取与每日签到
 #!author=MaYIHEI[https://github.com/MaYIHEI]
 #!icon=https://raw.githubusercontent.com/MaYIHEI/pin/refs/heads/main/app/wps.png
+#!tag=minky
+
 
 [MITM]
 hostname = personal-act.wps.cn
