@@ -55,6 +55,14 @@ function notify(title, subtitle, message) {
       return
     }
 
+       // 小组件发出的请求，跳过不抓
+    if (headers["x-cniao-skip-capture"]) {
+      console.log("[菜鸟autologin头抓取] 小组件请求，跳过")
+      $done({})
+      return
+    }
+
+
     if (!headers || Object.keys(headers).length === 0) {
       console.log("[菜鸟autologin头抓取] 请求头为空")
       $done({})
