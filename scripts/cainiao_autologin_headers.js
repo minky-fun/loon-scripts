@@ -5,7 +5,8 @@
  * 存储 key: cainiao_autologin_headers_json
  */
 
-const STORAGE_KEY = "cainiao_autologin_headers_json"
+const STORAGE_KEY_HEADERS = "cainiao_autologin_headers_json"
+const STORAGE_KEY_DATA = "cainiao_autologin_data"  // URL 里的 data 参数，回放时需要一字不差
 
 function writeStore(key, value) {
   try {
@@ -55,13 +56,12 @@ function notify(title, subtitle, message) {
       return
     }
 
-       // 小组件发出的请求，跳过不抓
+    // 小组件发出的请求，跳过不抓
     if (headers["x-cniao-skip-capture"]) {
       console.log("[菜鸟autologin头抓取] 小组件请求，跳过")
       $done({})
       return
     }
-
 
     if (!headers || Object.keys(headers).length === 0) {
       console.log("[菜鸟autologin头抓取] 请求头为空")
@@ -79,15 +79,21 @@ function notify(title, subtitle, message) {
     }
 
     const captureTime = getNowText()
-    const payload = JSON.stringify(cleaned)
 
-    writeStore(STORAGE_KEY, payload)
+    writeStore(STORAGE_KEY_HEADERS, JSON.stringify(cleaned))
+
+    // 从 URL 提取 data 参数，回放时需要一字不差（签名的 MD5 依赖它）
+    const dataMatch = url.match(/[?&]data=([^&]+)/)
+    if (dataMatch) {
+      writeStore(STORAGE_KEY_DATA, decodeURIComponent(dataMatch[1]))
+      console.log("[菜鸟autologin头抓取] data 参数已保存")
+    }
 
     console.log(`[菜鸟autologin头抓取] 抓取成功`)
     console.log(`[菜鸟autologin头抓取] 时间：${captureTime}`)
     console.log(`[菜鸟autologin头抓取] 头数量：${Object.keys(cleaned).length}`)
 
-    notify("菜鸟 autologin 头抓取成功", captureTime, `已保存 ${Object.keys(cleaned).length} 个头`)
+    notify("菜鸟 autologin 头抓取成功", captureTime, `已保存 ${Object.keys(cleaned).length} 个头 + data`)
 
     // 不修改请求，直接放行
     $done({})
