@@ -18,6 +18,16 @@ URL-REGEX,^https?:\/\/adashx\.m\.taobao\.com\/,REJECT
 URL-REGEX,^https?:\/\/tns\.alibaba\.com\/,REJECT
 URL-REGEX,^https?:\/\/amdc\.m\.taobao\.com\/,REJECT
 
+[Rewrite]
+^https:\/\/netflow-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.index reject
+^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.adkeyword\.get\.cn reject
+^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.show reject
+^https:\/\/(?:cn-acs\.m|e2e-mtop)\.cainiao\.com\/gw\/mtop\.cainiao\.app\.e2e\.engine\.page\.fetch response-body-json-jq 'del(.data.data.data.mainSearch.bizData.searchContents, .data.data.data.operationList)'
+^https:\/\/e2e-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.app\.e2e\.engine\.page\.fetch\.cn response-body-json-jq 'del(.data.data.banner, .data.data.activity, .data.data.vip)'
+^https:\/\/longquan-mtop\.cainiao\.com\/gw\/mtop\.com\.cainiao\.longquan\.place\.getpageresourcecontent\.cn response-body-json-jq 'del(.data.result.placeContentMap["780001"].contentList)'
+^https:\/\/netflow-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads response-body-json-jq 'if .data.result[0].materialId == "39017" then . else .data = {} end'
+^https:\/\/[^\/]+\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.ads\.expose\.mreply(?:\.cn)? reject
+
 [Script]
 http-request ^https?:\/\/[^\/]+\/gw\/ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao_no_ads.js, requires-body=false, timeout=10, tag=菜鸟广告请求拦截
 http-response ^https:\/\/(?:cn-acs|acs|guide-acs|nbpickup-mtop|caps-mtop)\.cainiao\.com\/gw\/ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao_no_ads.js, requires-body=true, timeout=10, tag=菜鸟去广告
