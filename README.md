@@ -54,6 +54,7 @@ This repository is licensed under the MIT License. You may study, modify, and di
 | 黑料网净化 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/hlwxx_remove_ads.lpx) |
 | 幻休 VIP 解锁 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/huanxiu_vip_unlock.lpx) |
 | 智行火车票去广告 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/zhixing.lpx) |
+| 菜鸟去广告 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/cainiao_no_ads.lpx) |
 | 菜鸟请求头抓取 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/CainiaoHeaders.plugin) |
 | 芒果tv解锁会员 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/MangoTV_Vip.plugin) |
 | PingMe(Loon) | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/PingMe_Loon.plugin) |
