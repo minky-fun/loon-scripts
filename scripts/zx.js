@@ -23,12 +23,18 @@ if (!$response.body) {
                 String(yesterday.getDate()).padStart(2, "0")
             ].join("-") + " 23:59:59";
 
-            // 将活动 Tab 配置的结束时间改为昨天，使客户端判定配置已过期。
+            // 将首页模块中的暑期促销 Tab 结束时间改为昨天。
             if (Array.isArray(body.configList)) {
                 for (const config of body.configList) {
-                    if (config.category === "TAB_ACTIVITY_CONFIG") {
+                    if (config.category === "HOME_NEW_SWITCH_MODE_10") {
                         const value = JSON.parse(config.value);
-                        value.endTime = endTime;
+                        if (Array.isArray(value.aTabModulesV2)) {
+                            for (const module of value.aTabModulesV2) {
+                                if (module.tag === "summer_promotion") {
+                                    module.endTime = endTime;
+                                }
+                            }
+                        }
                         config.value = JSON.stringify(value);
                     }
                 }
