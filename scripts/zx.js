@@ -14,8 +14,13 @@ if (!$response.body) {
     try {
         const body = JSON.parse($response.body);
 
-        // 清空广告席位，保留服务端原有状态码及其他响应字段。
-        body.seats = [];
+        if ($request.url.includes("/json/WelfareCenterTab")) {
+            // 将可空的活动 Tab 置空，保留接口其余响应字段。
+            body.tab = null;
+        } else {
+            // 清空广告席位，保留服务端原有状态码及其他响应字段。
+            body.seats = [];
+        }
         $done({ body: JSON.stringify(body) });
     } catch (error) {
         console.log("智行广告响应解析失败：" + error.message);
