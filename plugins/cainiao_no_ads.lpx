@@ -19,6 +19,7 @@ URL-REGEX,^https?:\/\/tns\.alibaba\.com\/,REJECT
 URL-REGEX,^https?:\/\/amdc\.m\.taobao\.com\/,REJECT
 
 [Rewrite]
+^https:\/\/nbcps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.nbcps\.presentation\.fetch\.cn reject
 ^https:\/\/netflow-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.index reject
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.adkeyword\.get\.cn reject
 ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.show reject
