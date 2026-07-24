@@ -60,7 +60,7 @@ const AD_API_PATTERNS = [
 let removedCount = 0;
 
 /**
- * 判断字段名是否属于动态库 Hook 点对应的广告字段。
+ * 判断字段名是否属于菜鸟广告字段。
  */
 function isAdKey(key) {
   const compactKey = String(key).replace(/[_-]/g, '').toLowerCase();

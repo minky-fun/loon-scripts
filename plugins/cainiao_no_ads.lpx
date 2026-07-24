@@ -1,5 +1,5 @@
 #!name=菜鸟去广告
-#!desc=基于 CNNoAd 动态库 Hook 点整理，清理菜鸟开屏、推荐、搜索、引导类广告响应字段
+#!desc=清理菜鸟开屏、推荐、搜索、引导类广告响应字段
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://pp.myapp.com/ma_icon/0/icon_11551760_1777010595/256
