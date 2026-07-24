@@ -15,6 +15,8 @@ DOMAIN,janapi.jd.com,REJECT
 [Script]
 # 移除携程 AdLib 返回的开屏、Banner 和弹窗广告
 http-response ^https?:\/\/(m\.ctrip\.com|gateway\.m\.(uat|fws)\.qa\.nt\.ctripcorp\.com)\/restapi\/soa2\/13916\/json\/tripAds script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票广告
+# 将首页活动 Tab 配置设为过期
+http-response ^https:\/\/m\.(suanya\.cn|ctrip\.com)\/restapi\/soa2\/18088\/GetAppConfig\.json script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票活动Tab配置
 # 移除首页中间的福利活动 Tab
 http-response ^https:\/\/m\.(suanya\.cn|ctrip\.com)\/restapi\/soa2\/15791\/json\/WelfareCenterTab script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票福利Tab
 

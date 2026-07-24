@@ -14,7 +14,26 @@ if (!$response.body) {
     try {
         const body = JSON.parse($response.body);
 
-        if ($request.url.includes("/json/WelfareCenterTab")) {
+        if ($request.url.includes("/18088/GetAppConfig.json")) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const endTime = [
+                yesterday.getFullYear(),
+                String(yesterday.getMonth() + 1).padStart(2, "0"),
+                String(yesterday.getDate()).padStart(2, "0")
+            ].join("-") + " 23:59:59";
+
+            // 将活动 Tab 配置的结束时间改为昨天，使客户端判定配置已过期。
+            if (Array.isArray(body.configList)) {
+                for (const config of body.configList) {
+                    if (config.category === "TAB_ACTIVITY_CONFIG") {
+                        const value = JSON.parse(config.value);
+                        value.endTime = endTime;
+                        config.value = JSON.stringify(value);
+                    }
+                }
+            }
+        } else if ($request.url.includes("/json/WelfareCenterTab")) {
             // 将可空的活动 Tab 置空，保留接口其余响应字段。
             body.tab = null;
         } else {
