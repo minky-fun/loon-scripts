@@ -1,29 +1,20 @@
-#!name= 智行火车票去广告
-#!desc= 智行火车去广告beta版 学习开发中....
-#!author= Minky[https://github.com/minky-fun]
-#!icon= https://minky-fun.github.io/loon-scripts/assets/zhixing.png
-#!tag = 去广告,火车票,minky
-#!loon_version = 3.2.1(372)
-#!date=2025-09-18 16:01:09
-
-#############################################
-; REJECT (返回404和空响应体)
-; REJECT-IMG (返回200和一个 1px GIF 的响应体)
-; REJECT-DICT (返回200和内容为空的 JSON 的响应体)
-; REJECT-ARRY (返回200和一个内容为空的 JSON 数组)
-; REJECT-DROP (拒绝并丢弃请求，且不会返回任何响应。因为部分程序有着十分暴力的重试逻辑，连接失败后会立刻进行重试，导致请求风暴)
-#############################################
+#!name=智行火车票去广告
+#!desc=移除携程 AdLib 广告并拦截京东 DSP 广告请求
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://minky-fun.github.io/loon-scripts/assets/zhixing.png
+#!tag=去广告,火车票,minky
+#!loon_version=3.2.1(372)
+#!date=2026-07-24
 
 [Rule]
-
+DOMAIN,dsp-x.jd.com,REJECT
+DOMAIN,dsp-test-x.jd.com,REJECT
+DOMAIN,janapi.jd.com,REJECT
 
 [Script]
-
-
-
-#移除开屏页广告
-http-response ^https?:\/\/(m|www)\.ctrip\.com/restapi/soa2/\d+/json/tripAds script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票开屏广告
-
+# 移除携程 AdLib 返回的开屏、Banner 和弹窗广告
+http-response ^https?:\/\/(m\.ctrip\.com|gateway\.m\.(uat|fws)\.qa\.nt\.ctripcorp\.com)\/restapi\/soa2\/13916\/json\/tripAds script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票广告
 
 [Mitm]
-hostname = *.ctrip.cn, *.ctrip.com, ctrip.com
+hostname = m.ctrip.com
