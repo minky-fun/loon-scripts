@@ -5,8 +5,22 @@
 #!icon=https://pp.myapp.com/ma_icon/0/icon_11551760_1777010595/256
 #!tag=minky
 
+[Rule]
+URL-REGEX,^https?:\/\/[^\/]*\.youku\.com\/,REJECT
+URL-REGEX,^https?:\/\/[^\/]*\.alicdn\.com\/amdp\/,REJECT
+URL-REGEX,^https?:\/\/ad\.ma\.taobao\.com\/,REJECT
+URL-REGEX,^https?:\/\/acs\.m\.taobao\.com\/,REJECT
+URL-REGEX,^https?:\/\/h\.uc\.cn\/,REJECT
+URL-REGEX,^https?:\/\/hydra\.alicdn\.com\/,REJECT
+URL-REGEX,^https?:\/\/pixel\.taobao\.com\/,REJECT
+URL-REGEX,^https?:\/\/re\.m\.taobao\.com\/,REJECT
+URL-REGEX,^https?:\/\/adashx\.m\.taobao\.com\/,REJECT
+URL-REGEX,^https?:\/\/tns\.alibaba\.com\/,REJECT
+URL-REGEX,^https?:\/\/amdc\.m\.taobao\.com\/,REJECT
+
 [Script]
+http-request ^https?:\/\/[^\/]+\/gw\/ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao_no_ads.js, requires-body=false, timeout=10, tag=菜鸟广告请求拦截
 http-response ^https:\/\/(?:cn-acs|acs|guide-acs|nbpickup-mtop|caps-mtop)\.cainiao\.com\/gw\/ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao_no_ads.js, requires-body=true, timeout=10, tag=菜鸟去广告
 
 [Mitm]
-hostname = cn-acs.m.cainiao.com, acs.m.cainiao.com, guide-acs.m.cainiao.com, nbpickup-mtop.cainiao.com, caps-mtop.cainiao.com
+hostname = *.cainiao.com, *.taobao.com, *.alicdn.com, *.youku.com, h.uc.cn, tns.alibaba.com

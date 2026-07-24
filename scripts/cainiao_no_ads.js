@@ -41,6 +41,22 @@ const AD_KEYS = new Set([
   'splashinfo',
 ]);
 
+const AD_MTOP_APIS = new Set([
+  'mtop.cainiao.guoguo.nbnetflow.ads.show.cn',
+  'mtop.cainiao.guoguo.ads.expose.mreply.cn',
+  'mtop.cainiao.nbcommerce.recommend.feedback.forbid.query.cn',
+]);
+
+const AD_API_PATTERNS = [
+  /guoguo\/nbnetflow\/ads/i,
+  /guoguo\/ads\/expose/i,
+  /hubble\/ads/i,
+  /splashscreen\/getSplashInfo/i,
+  /amdp\//i,
+  /recommend\/ad/i,
+  /acds\//i,
+];
+
 let removedCount = 0;
 
 /**
@@ -53,11 +69,58 @@ function isAdKey(key) {
 }
 
 /**
- * 递归清理对象或数组里的广告字段。
+ * 判断当前请求是否命中广告 API。
+ */
+function isAdApi(url) {
+  if (AD_API_PATTERNS.some((pattern) => pattern.test(url))) {
+    return true;
+  }
+
+  const dataMatch = url.match(/[?&]data=([^&]+)/);
+  if (!dataMatch) {
+    return false;
+  }
+
+  try {
+    const data = JSON.parse(decodeURIComponent(dataMatch[1]));
+    const api = data.api || data.apiName || '';
+
+    return AD_MTOP_APIS.has(api);
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * 返回空 MTOP 成功响应，让广告请求不再继续。
+ */
+function doneEmptyResponse() {
+  $done({
+    response: {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ret: ['SUCCESS::调用成功'], data: {} }),
+    },
+  });
+}
+
+/**
+ * 递归清理对象或数组里的广告字段，并过滤信息流广告项。
  */
 function cleanAds(value) {
   if (Array.isArray(value)) {
-    value.forEach(cleanAds);
+    for (let index = value.length - 1; index >= 0; index -= 1) {
+      const item = value[index];
+
+      if (item && typeof item === 'object' && (item.adType || item.isAd || item.advertisement)) {
+        value.splice(index, 1);
+        removedCount += 1;
+        continue;
+      }
+
+      cleanAds(item);
+    }
+
     return value;
   }
 
@@ -79,27 +142,54 @@ function cleanAds(value) {
 }
 
 /**
- * Loon 响应脚本入口。
+ * 处理 Loon 请求脚本入口。
+ */
+function handleRequest() {
+  const url = $request && $request.url ? $request.url : '';
+
+  if (isAdApi(url)) {
+    console.log(`[菜鸟去广告] 拦截广告请求：${url}`);
+    doneEmptyResponse();
+    return;
+  }
+
+  $done({});
+}
+
+/**
+ * 处理 Loon 响应脚本入口。
+ */
+function handleResponse() {
+  const body = $response && $response.body ? $response.body : '';
+
+  if (!body) {
+    $done({});
+    return;
+  }
+
+  const json = JSON.parse(body);
+  cleanAds(json);
+
+  if (removedCount > 0) {
+    console.log(`[菜鸟去广告] 已清理字段：${removedCount}`);
+    $done({ body: JSON.stringify(json) });
+    return;
+  }
+
+  $done({});
+}
+
+/**
+ * 根据 Loon 当前上下文执行请求拦截或响应清理。
  */
 function main() {
   try {
-    const body = $response && $response.body ? $response.body : '';
-
-    if (!body) {
-      $done({});
+    if (typeof $response === 'undefined') {
+      handleRequest();
       return;
     }
 
-    const json = JSON.parse(body);
-    cleanAds(json);
-
-    if (removedCount > 0) {
-      console.log(`[菜鸟去广告] 已清理字段：${removedCount}`);
-      $done({ body: JSON.stringify(json) });
-      return;
-    }
-
-    $done({});
+    handleResponse();
   } catch (error) {
     console.log('[菜鸟去广告] 脚本异常');
     console.log(String(error));
