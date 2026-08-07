@@ -21,6 +21,7 @@ URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)(?::\d+)?\/.*adv
 http-response ^https:\/\/app\.imou\.com\/pcs\/v1\/discoveryDefaultAuth\.resource\.RecommendBanner script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/lechange_ad_block.js, requires-body=true, timeout=10, tag=乐橙首页Banner
 http-response ^https:\/\/app\.imou\.com\/pcs\/v1\/sight\.advert\.AdvertInfoList script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/lechange_ad_block.js, requires-body=true, timeout=10, tag=乐橙活动广告
 http-response ^https:\/\/app\.imou\.com\/pcs\/v1\/sight\.activity\.ActivityInfoList script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/lechange_ad_block.js, requires-body=true, timeout=10, tag=乐橙活动列表
+http-response ^https:\/\/app\.imou\.com\/pcs\/v1\/discoveryDefaultAuth\.resource\.RecommendPlanHotResourceFlowNew script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/lechange_ad_block.js, requires-body=true, timeout=10, tag=乐橙热门资源
 
 [Mitm]
 hostname = dl-ct-hz.imou.com, app.imou.com

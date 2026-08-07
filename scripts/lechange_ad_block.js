@@ -13,4 +13,5 @@ const data = JSON.parse($response.body);
 if (data.data && Array.isArray(data.data.itemByBanner)) data.data.itemByBanner = [];
 if (data.data && Array.isArray(data.data.item)) data.data.item = [];
 if (data.data && Array.isArray(data.data.list)) data.data.list = [];
+if (data.data && Object.prototype.hasOwnProperty.call(data.data, 'hasNext')) data.data.hasNext = false;
 $done({ body: JSON.stringify(data) });
