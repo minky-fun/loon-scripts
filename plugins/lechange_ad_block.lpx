@@ -16,3 +16,6 @@
 
 [Rule]
 URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)\/.*advertisement,REJECT
+
+[Mitm]
+hostname = *.lechange.cn, *.imou.com
