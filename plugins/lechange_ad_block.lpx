@@ -15,7 +15,7 @@
 # 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 
 [Rule]
-URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)\/.*advertisement,REJECT
+URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)(?::\d+)?\/.*advertisement,REJECT
 
 [Mitm]
 hostname = dl-ct-hz.imou.com
