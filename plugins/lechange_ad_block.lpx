@@ -17,5 +17,8 @@
 [Rule]
 URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)(?::\d+)?\/.*advertisement,REJECT
 
+[Script]
+http-response ^https:\/\/app\.imou\.com\/pcs\/v1\/discoveryDefaultAuth\.resource\.RecommendBanner script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/lechange_ad_block.js, requires-body=true, timeout=10, tag=乐橙首页Banner
+
 [Mitm]
-hostname = dl-ct-hz.imou.com
+hostname = dl-ct-hz.imou.com, app.imou.com
