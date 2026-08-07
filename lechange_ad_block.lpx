@@ -6,4 +6,4 @@
 #!tag=minky
 
 [Rule]
-URL-REGEX,^https?:\/\/dl-cu-hz\.lechange\.cn\/oms-online\/advertisementPush\/,REJECT
+URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)\/.*advertisement,REJECT
