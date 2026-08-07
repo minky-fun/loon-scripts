@@ -1,0 +1,12 @@
+#!name=地震预警
+#!desc=修改苹果会员查询接口响应，会员有效期动态延长 10 年。
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/8d/81/49/8d81496a-896e-7d0c-ccc6-ab6358fd4c47/Placeholder.mill/400x400bb-75.jpg
+#!tag=minky
+
+[Script]
+http-response ^https:\/\/mobile-new\.chinaeew\.cn\/v1\/order\/apple\/vip$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/earthquake_warning_svip.js, requires-body=true, timeout=10, tag=地震预警
+
+[Mitm]
+hostname = mobile-new.chinaeew.cn

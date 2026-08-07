@@ -1,0 +1,24 @@
+#!name=智行火车票去广告
+#!desc=移除携程 AdLib 广告并拦截京东 DSP 广告请求
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://minky-fun.github.io/loon-scripts/assets/zhixing.png
+#!tag=去广告,火车票,minky
+#!loon_version=3.2.1(372)
+#!date=2026-07-24
+
+[Rule]
+DOMAIN,dsp-x.jd.com,REJECT
+DOMAIN,dsp-test-x.jd.com,REJECT
+DOMAIN,janapi.jd.com,REJECT
+
+[Script]
+# 移除携程 AdLib 返回的开屏、Banner 和弹窗广告
+http-response ^https?:\/\/(m\.ctrip\.com|gateway\.m\.(uat|fws)\.qa\.nt\.ctripcorp\.com)\/restapi\/soa2\/13916\/json\/tripAds script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票广告
+# 将暑期促销 Tab 配置设为过期
+http-response ^https:\/\/m\.(suanya\.cn|ctrip\.com)\/restapi\/soa2\/18088\/GetAppConfig\.json script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票暑期促销Tab
+# 移除首页中间的福利活动 Tab
+http-response ^https:\/\/m\.(suanya\.cn|ctrip\.com)\/restapi\/soa2\/15791\/json\/WelfareCenterTab script-path=https://minky-fun.github.io/loon-scripts/scripts/zx.js, requires-body=true, timeout=60, tag=智行火车票福利Tab
+
+[Mitm]
+hostname = m.ctrip.com, m.suanya.cn

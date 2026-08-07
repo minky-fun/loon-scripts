@@ -1,0 +1,13 @@
+#!name=菜鸟请求头抓取
+#!desc=抓取菜鸟 package dyn list 接口请求头，并保存到 BoxJS / Loon 持久化存储
+#!author=Minky
+#!icon=https://pp.myapp.com/ma_icon/0/icon_11551760_1777010595/256
+#!tag=minky
+
+[Script]
+http-request ^https:\/\/(?:nbpickup-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.nbpickup\.site\.pickup\.page\.query\.cn|caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.(?:lpc|pcs)\.packageservice\.querypackagedynlist\.cn)\/1\.0 script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao.js, requires-body=false, timeout=10, tag=菜鸟包裹请求头抓取
+http-response ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cnmember\.customer\.autologin\/1\.0 script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao.js, requires-body=true, timeout=10, tag=菜鸟refreshToken抓取
+http-request ^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cnmember\.customer\.autologin\/1\.0 script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/cainiao.js, requires-body=true, timeout=10, tag=菜鸟auto请求头抓取
+
+[Mitm]
+hostname = caps-mtop.cainiao.com, cn-acs.m.cainiao.com, nbpickup-mtop.cainiao.com

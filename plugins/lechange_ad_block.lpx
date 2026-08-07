@@ -1,0 +1,9 @@
+#!name=乐橙去广告
+#!desc=屏蔽乐橙App开屏广告和广告推送请求
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://www.lechange.cn/favicon.ico
+#!tag=minky
+
+[Rule]
+URL-REGEX,^https?:\/\/dl-[a-z]+-[a-z]+\.(lechange\.cn|imou\.com)\/.*advertisement,REJECT

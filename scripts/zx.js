@@ -1,0 +1,54 @@
+/*
+免责声明：
+1. 本脚本仅供学习、研究与技术交流使用，不保证其合法性、准确性、有效性或适用性，请自行判断并承担使用风险。
+2. 本脚本仅供临时学习研究，下载或使用后请于 24 小时内从您的计算机、手机或其他存储设备中删除；因未及时删除或继续使用所产生的一切后果由使用者自行承担。
+3. 请勿将本脚本用于任何商业用途、非法用途或侵犯第三方权益的行为；如违反相关规定，责任由使用者自行承担。
+4. 本脚本涉及的应用、平台或服务均与本人无关；因使用本脚本导致的账号异常、隐私泄露、数据丢失或其他后果，本人不承担任何责任。
+5. 本人不对脚本运行结果作任何承诺，也不承担因脚本错误、接口变更、使用不当等原因造成的任何直接或间接损失。
+6. 如任何单位或个人认为本脚本可能侵犯其合法权益，请提供有效身份证明和权属证明并联系处理；核实后将及时删除或调整相关内容。
+7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
+*/
+if (!$response.body) {
+    $done({});
+} else {
+    try {
+        const body = JSON.parse($response.body);
+
+        if ($request.url.includes("/18088/GetAppConfig.json")) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const endTime = [
+                yesterday.getFullYear(),
+                String(yesterday.getMonth() + 1).padStart(2, "0"),
+                String(yesterday.getDate()).padStart(2, "0")
+            ].join("-") + " 23:59:59";
+
+            // 将首页模块中的暑期促销 Tab 结束时间改为昨天。
+            if (Array.isArray(body.configList)) {
+                for (const config of body.configList) {
+                    if (config.category === "HOME_NEW_SWITCH_MODE_10") {
+                        const value = JSON.parse(config.value);
+                        if (Array.isArray(value.aTabModulesV2)) {
+                            for (const module of value.aTabModulesV2) {
+                                if (module.tag === "summer_promotion") {
+                                    module.endTime = endTime;
+                                }
+                            }
+                        }
+                        config.value = JSON.stringify(value);
+                    }
+                }
+            }
+        } else if ($request.url.includes("/json/WelfareCenterTab")) {
+            // 将可空的活动 Tab 置空，保留接口其余响应字段。
+            body.tab = null;
+        } else {
+            // 清空广告席位，保留服务端原有状态码及其他响应字段。
+            body.seats = [];
+        }
+        $done({ body: JSON.stringify(body) });
+    } catch (error) {
+        console.log("智行广告响应解析失败：" + error.message);
+        $done({});
+    }
+}

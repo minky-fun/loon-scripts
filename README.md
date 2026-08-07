@@ -50,7 +50,7 @@ This repository is licensed under the MIT License. You may study, modify, and di
 
 | 插件名称 / Plugin | 安装地址 / Install |
 |---|---|
-| 乐橙去广告 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/lechange_ad_block.lpx) |
+| 乐橙去广告 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/lechange_ad_block.lpx) |
 | 地震预警 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/earthquake_warning_svip.lpx) |
 | 黑料网净化 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/hlwxx_remove_ads.lpx) |
 | 幻休 VIP 解锁 | [安装 / Install](https://www.nsloon.com/openloon/import?plugin=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/plugins/huanxiu_vip_unlock.lpx) |
