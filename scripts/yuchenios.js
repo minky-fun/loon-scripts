@@ -19,7 +19,7 @@ $.userIdx = 0, $.userList = [], $.notifyMsg = [];
 $.succCount = 0;
 //debug
 $.is_debug = ($.isNode() ? process.env.IS_DEDUG : $.getdata('is_debug')) || 'false';
-$.host = ($.isNode() ? process.env["yuchenios_host"] : $.getdata('yuchenios_host')) || 'yc.yuchengyouxi.com';
+$.host = ($.isNode() ? process.env["yuchenios_host"] : $.getdata('yuchenios_host')) || 'iosyc.com';
 //------------------------------------------
 async function main() {
     for (let user of $.userList) {
@@ -109,7 +109,7 @@ class UserInfo {
                 type: "post",
                 dataType: "form",
                 resultType: "all",
-                body: `user_login=${this.phone}&password=${this.password}&rememberme=1&redirect=https%3A%2F%2Fyc.yuchengyouxi.com%2F&action=userlogin_form&token=${token}`
+                body: `user_login=${this.phone}&password=${this.password}&rememberme=1&redirect=https%3A%2F%2Fiosyc.com%2F&action=userlogin_form&token=${token}`
 
             }
             let res = await this.fetch(opts);
