@@ -1,5 +1,5 @@
 #!name=乐透小程序 VIP
-#!desc=修改品牌列表响应中的 VIP 状态。
+#!desc=修改品牌列表响应中的 VIP 状态，到期时间动态设置为 30 天后。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png

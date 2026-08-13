@@ -15,9 +15,12 @@ try {
   const brands = JSON.parse(body);
 
   if (Array.isArray(brands)) {
+    // VIP 到期时间使用当前时间后 30 天的毫秒时间戳。
+    const vipEndTime = Date.now() + 30 * 24 * 60 * 60 * 1000;
+
     for (const brand of brands) {
       brand.vipGrade = 1;
-      brand.vipEndTime = 1;
+      brand.vipEndTime = vipEndTime;
       brand.isExperience = 100;
     }
 
