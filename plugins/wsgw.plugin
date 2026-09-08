@@ -12,10 +12,12 @@
 #    数据来自国家电网接口，本插件仅作展示，不保存任何账号密码。
 # 3. 使用前请先在 BoxJS 中添加订阅并配置「网上国网」账号密码：
 #    https://raw.githubusercontent.com/Yuheng0101/X/main/Tasks/boxjs.json
-# 4. 请开启代理 + 本插件 + MITM 后，再到 Scripting 中 SGCC_Mod 点「获取账户列表」。
+# 4. 请开启 Loon、脚本、MITM，并确认 CA 证书已安装且完全信任。
 
 [Script]
-http-request ^https?:\/\/api\.wsgw-rewrite\.com\/electricity\/bill\/all script-path=https://raw.githubusercontent.com/dompling/Script/master/wsgw/index.js, requires-body=true, timeout=60, tag=网上国网数据
+
+http-request ^https?:\/\/api\.wsgw-rewrite\.com\/electricity\/bill\/all(?:\?.*)?$ script-path=https://raw.githubusercontent.com/dompling/Script/master/wsgw/index.js,max-size=-1,timeout=60,tag=网上国网数据
 
 [Mitm]
-hostname = %APPEND% api.wsgw-rewrite.com
+
+hostname = api.wsgw-rewrite.com
