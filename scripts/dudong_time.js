@@ -9,11 +9,17 @@
 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 */
 
-// 按接口路径分别修改详情状态码和付费状态。
+// 按接口路径分别修改详情状态码、模块付费状态和整体付费状态。
 const body = JSON.parse($response.body);
 
 if (/\/subscribe\/detail(?:\?|$)/.test($request.url)) {
   body.code = 200;
+  $done({ body: JSON.stringify(body) });
+} else if (/\/subscribe\/checkUserPaidModules(?:\?|$)/.test($request.url) && body.code === 200 && Array.isArray(body.data)) {
+  // 根据模块列表响应结构，将每个模块的 paid 设为 true。
+  for (const module of body.data) {
+    module.paid = true;
+  }
   $done({ body: JSON.stringify(body) });
 } else if (/\/subscribe\/checkUserPaid(?:\?|$)/.test($request.url) && body.code === 200 && body.data === false) {
   body.data = true;
