@@ -1,5 +1,5 @@
 #!name=读懂时光
-#!desc=将 checkUserPaid 的付费状态和 checkUserPaidModules 的各模块 paid 修改为 true，将 detail 的 code 修改为 200，并将 checkUserTermPaid 的 TOPAY 改为 PAID（状态值待验证）。
+#!desc=将 checkUserPaid 的付费状态、checkUserPaidModules 的 paid 和 getOrderInfo 的模块 free 修改为 true，将 detail 的 code 修改为 200，并将 checkUserTermPaid 的 TOPAY 改为 PAID（状态值待验证）。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png
@@ -15,7 +15,7 @@
 # 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 
 [Script]
-http-response ^https:\/\/s\.dudongx\.com\/api\/ap\/keyboarder\/subscribe\/(?:checkUserPaid|checkUserPaidModules|checkUserTermPaid|detail)(?:\?|$) script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/dudong_time.js, requires-body=true, timeout=60, tag=读懂时光
+http-response ^https:\/\/s\.dudongx\.com\/api\/ap\/keyboarder\/subscribe\/(?:checkUserPaid|checkUserPaidModules|checkUserTermPaid|getOrderInfo|detail)(?:\?|$) script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/dudong_time.js, requires-body=true, timeout=60, tag=读懂时光
 
 [Mitm]
 hostname = s.dudongx.com
