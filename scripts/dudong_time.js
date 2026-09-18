@@ -30,8 +30,8 @@ if (/\/subscribe\/detail(?:\?|$)/.test($request.url)) {
   }
   $done({ body: JSON.stringify(body) });
 } else if (/\/subscribe\/checkUserTermPaid(?:\?|$)/.test($request.url) && body.code === 200 && body.data && body.data.status === 'TOPAY') {
-  // 按用户指定将 TOPAY 改为推测值 PAID，实际状态枚举尚待验证。
-  body.data.status = 'PAID';
+  // 前端会员校验在 status 为 NORMAL 时渲染目标页面。
+  body.data.status = 'NORMAL';
   $done({ body: JSON.stringify(body) });
 } else if (/\/subscribe\/checkUserPaid(?:\?|$)/.test($request.url) && body.code === 200 && body.data === false) {
   body.data = true;
