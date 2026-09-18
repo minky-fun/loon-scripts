@@ -1,6 +1,6 @@
 #!name=读懂时光
-#!desc=v1.0.2｜将 checkUserPaid 的付费状态、checkUserPaidModules 的 paid 和 getOrderInfo 的模块 free 修改为 true，将 detail 的 code 修改为 200，并将 checkUserTermPaid 的 TOPAY 改为 NORMAL。
-#!author=Minky
+#!desc=调整会员及学期访问状态，将各模块标记为已付费、套餐功能标记为免费，并修正订阅详情响应状态码。
+#!author=Minky｜版本 v1.0.3｜更新日期 2026-09-18
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://obs-dudongx.xdudong.com/ugc_1670836055246_favicon.png
 #!tag=minky
