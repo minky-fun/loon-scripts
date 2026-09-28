@@ -42,8 +42,14 @@
       if (level !== null) user.VipLevel = level;
       user.VipLevelTitle = '至尊会员';
       user.VipExpireAt = expiry;
-      // 短视频的广告横幅读取 Perms.hideAd；明确的 false 优先于 IsVip。
-      user.Perms = Object.assign({}, user.Perms || {}, { hideAd: true });
+      // 仅统一打开返回中已有的布尔型权益；数值配额及服务端 CDN 配置不伪造。
+      const perms = Object.assign({}, user.Perms || {});
+      for (const name of Object.keys(perms)) {
+        if (typeof perms[name] === 'boolean') perms[name] = true;
+      }
+      perms.hideAd = true;
+      perms.cdnSpeed = true;
+      user.Perms = perms;
     }
     let changed = false;
     if (endpoint[1] === 'community/browse/tick') {

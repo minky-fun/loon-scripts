@@ -1,5 +1,5 @@
 #!name=大象视频 至尊会员本地响应测试
-#!desc=本机解密改写会员信息、hideAd、短视频观看限制和社区浏览门禁；不修改服务端权限。
+#!desc=本机解密改写会员信息、已有布尔型权益（含 CDN 线路）、短视频及社区浏览门禁；不修改服务端权限。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!tag=minky
