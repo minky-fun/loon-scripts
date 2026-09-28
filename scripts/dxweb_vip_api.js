@@ -3,7 +3,7 @@
 (function () {
   const PREFIX = '[dxweb VIP] ';
   const key = new TextEncoder().encode('mWnOc2VfZALtgvOD437RrV3S7sM1ZoBW');
-  const endpoint = /\/api\/(user\/info\/get|vip\/get)(?:\?|$)/.exec($request.url);
+  const endpoint = /\/api\/(user\/info\/get|vip\/get|discover\/mark)(?:\?|$)/.exec($request.url);
   if (!endpoint) { $done({}); return; }
   try {
     const original = $response.body;
@@ -46,7 +46,11 @@
       user.Perms = Object.assign({}, user.Perms || {}, { hideAd: true });
     }
     let changed = false;
-    if (endpoint[1] === 'user/info/get') {
+    if (endpoint[1] === 'discover/mark') {
+      // 只关闭前端“今日观看限制”分支；不伪造计数或视频地址。
+      packet.d.DailyWatchLimited = false;
+      changed = true;
+    } else if (endpoint[1] === 'user/info/get') {
       applyMember(packet.d);
       changed = true;
     } else if (packet.d.UserInfo && typeof packet.d.UserInfo === 'object') {
@@ -54,7 +58,7 @@
       changed = true;
     }
     if (!changed) {
-      console.log(PREFIX + endpoint[1] + ' 无 UserInfo，保留原响应');
+      console.log(PREFIX + endpoint[1] + ' 无可修改的用户信息，保留原响应');
       $done({}); return;
     }
     const text = new TextEncoder().encode(JSON.stringify(packet));
