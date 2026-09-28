@@ -3,7 +3,7 @@
 (function () {
   const PREFIX = '[dxweb VIP] ';
   const key = new TextEncoder().encode('mWnOc2VfZALtgvOD437RrV3S7sM1ZoBW');
-  const endpoint = /\/api\/(user\/info\/get|vip\/get|discover\/mark)(?:\?|$)/.exec($request.url);
+  const endpoint = /\/api\/(user\/info\/get|vip\/get|discover\/mark|community\/browse\/tick)(?:\?|$)/.exec($request.url);
   if (!endpoint) { $done({}); return; }
   try {
     const original = $response.body;
@@ -46,7 +46,14 @@
       user.Perms = Object.assign({}, user.Perms || {}, { hideAd: true });
     }
     let changed = false;
-    if (endpoint[1] === 'discover/mark') {
+    if (endpoint[1] === 'community/browse/tick') {
+      // 社区计时字段均为秒；Unlimited=true 时前端不再启用倒计时。
+      packet.d.Unlimited = true;
+      packet.d.Remaining = 86400;
+      packet.d.Locked = false;
+      packet.d.LimitSec = 86400;
+      changed = true;
+    } else if (endpoint[1] === 'discover/mark') {
       // 只关闭前端“今日观看限制”分支；不伪造计数或视频地址。
       packet.d.DailyWatchLimited = false;
       changed = true;

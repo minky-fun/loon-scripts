@@ -1,5 +1,5 @@
 #!name=大象视频 至尊会员本地响应测试
-#!desc=本机解密改写会员信息、hideAd 与 discover/mark 的 DailyWatchLimited；不修改服务端权限。
+#!desc=本机解密改写会员信息、hideAd、短视频观看限制和社区浏览门禁；不修改服务端权限。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!tag=minky
@@ -7,7 +7,7 @@
 
 # 接口线路会自动切换。其他自定义线路不在此列表内。
 [Script]
-http-response ^https:\/\/(?:reg\.(?:spline(?:003|004|006)|cfline002|lbsline001)|api\.cfline(?:001|003))\.xyz\/api\/(?:user\/info\/get|vip\/get|discover\/mark)(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/dxweb_vip_api.js, requires-body=true, binary-body-mode=true, tag=大象视频VIP接口响应
+http-response ^https:\/\/(?:reg\.(?:spline(?:003|004|006)|cfline002|lbsline001)|api\.cfline(?:001|003))\.xyz\/api\/(?:user\/info\/get|vip\/get|discover\/mark|community\/browse\/tick)(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/dxweb_vip_api.js, requires-body=true, binary-body-mode=true, tag=大象视频VIP接口响应
 
 [Mitm]
 hostname = reg.spline004.xyz, reg.spline003.xyz, api.cfline003.xyz, api.cfline001.xyz, reg.cfline002.xyz, reg.spline006.xyz, reg.lbsline001.xyz
