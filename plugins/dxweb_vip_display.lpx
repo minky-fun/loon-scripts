@@ -1,11 +1,13 @@
-#!name=大象视频 VIP 本地展示
-#!desc=仅修改 dxweb009.xyz 的本机网页会员展示，不改变服务端会员或播放权限；前端更新后可能失效。
+#!name=大象视频 VIP 本地响应测试
+#!desc=拦截并解密 user/info/get 与 vip/get，改写本机收到的会员展示字段；不修改服务端授权。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!tag=minky
+#!loon_version=3.5.1(988)
 
+# 接口线路会自动切换。其他自定义线路不在此列表内。
 [Script]
-http-response ^https:\/\/dxweb009\.xyz\/assets\/index-[^/?]+\.js(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/dxweb_vip_display.js, requires-body=true, tag=大象视频VIP本地展示
+http-response ^https:\/\/(?:reg\.(?:spline(?:003|004|006)|cfline002|lbsline001)|api\.cfline(?:001|003))\.xyz\/api\/(?:user\/info\/get|vip\/get)(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/dxweb_vip_api.js, requires-body=true, binary-body-mode=true, tag=大象视频VIP接口响应
 
 [Mitm]
-hostname = dxweb009.xyz
+hostname = reg.spline004.xyz, reg.spline003.xyz, api.cfline003.xyz, api.cfline001.xyz, reg.cfline002.xyz, reg.spline006.xyz, reg.lbsline001.xyz

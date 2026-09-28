@@ -1,0 +1,62 @@
+// Loon 998+: API 响应是 IV(16) + AES-256-CBC 二进制，不是 JSON 文本。
+// 仅影响客户端看到的用户信息；不修改服务端账号和播放鉴权。
+(function () {
+  const PREFIX = '[dxweb VIP] ';
+  const key = new TextEncoder().encode('mWnOc2VfZALtgvOD437RrV3S7sM1ZoBW');
+  const endpoint = /\/api\/(user\/info\/get|vip\/get)(?:\?|$)/.exec($request.url);
+  if (!endpoint) { $done({}); return; }
+  try {
+    const original = $response.body;
+    if (!(original instanceof Uint8Array) || original.length < 32 || (original.length - 16) % 16 !== 0) {
+      throw Error('需要二进制响应：检查 binary-body-mode=true 和 MitM');
+    }
+    const iv = original.slice(0, 16);
+    const plain = $crypto.aes.decrypt(original.slice(16), {
+      mode: 'cbc', padding: 'pkcs7', key: key, iv: iv
+    });
+    const compressed = plain.length >= 2 && plain[0] === 0x1f && plain[1] === 0x8b;
+    const decoded = compressed ? $utils.ungzip(plain) : plain;
+    const packet = JSON.parse(new TextDecoder().decode(decoded));
+    if (packet.c !== 0 || !packet.d || typeof packet.d !== 'object') {
+      console.log(PREFIX + endpoint[1] + ' 返回非成功或无数据，保留原响应；状态=' + String(packet.c));
+      $done({}); return;
+    }
+    const expiry = 2051193600; // 2035-01-01 00:00 +08:00，Unix 秒
+    let changed = false;
+    if (endpoint[1] === 'user/info/get') {
+      packet.d.IsVip = true;
+      packet.d.VipLevel = 1;
+      packet.d.VipLevelTitle = 'VIP会员（本地展示）';
+      packet.d.VipExpireAt = expiry;
+      changed = true;
+    } else if (packet.d.UserInfo && typeof packet.d.UserInfo === 'object') {
+      packet.d.UserInfo.IsVip = true;
+      packet.d.UserInfo.VipLevel = 1;
+      packet.d.UserInfo.VipLevelTitle = 'VIP会员（本地展示）';
+      packet.d.UserInfo.VipExpireAt = expiry;
+      changed = true;
+    }
+    if (!changed) {
+      console.log(PREFIX + endpoint[1] + ' 无 UserInfo，保留原响应');
+      $done({}); return;
+    }
+    const text = new TextEncoder().encode(JSON.stringify(packet));
+    const payload = compressed ? $utils.gzip(text) : text;
+    // 前端解密仅将前 16 字节当作 IV，不校验其签名；保留原 IV。
+    const cipher = $crypto.aes.encrypt(payload, {
+      mode: 'cbc', padding: 'pkcs7', key: key, iv: iv
+    }).ciphertext;
+    const result = new Uint8Array(16 + cipher.length);
+    result.set(iv, 0);
+    result.set(cipher, 16);
+    const headers = Object.assign({}, $response.headers || {});
+    for (const name of Object.keys(headers)) {
+      if (name.toLowerCase() === 'content-length') delete headers[name];
+    }
+    console.log(PREFIX + endpoint[1] + ' 已解密并改写响应 (' + original.length + ' -> ' + result.length + ' bytes)');
+    $done({ body: result, headers: headers });
+  } catch (error) {
+    console.log(PREFIX + endpoint[1] + ' 解密或改写失败，保留原响应: ' + String(error));
+    $done({});
+  }
+})();
