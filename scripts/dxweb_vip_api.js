@@ -42,6 +42,8 @@
       if (level !== null) user.VipLevel = level;
       user.VipLevelTitle = '至尊会员';
       user.VipExpireAt = expiry;
+      // 短视频的广告横幅读取 Perms.hideAd；明确的 false 优先于 IsVip。
+      user.Perms = Object.assign({}, user.Perms || {}, { hideAd: true });
     }
     let changed = false;
     if (endpoint[1] === 'user/info/get') {

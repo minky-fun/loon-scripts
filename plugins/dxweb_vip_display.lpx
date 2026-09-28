@@ -1,5 +1,5 @@
 #!name=大象视频 至尊会员本地响应测试
-#!desc=解密并改写本机收到的会员称号，至尊等级编号从 vip/get 的 Levels 识别；不修改服务端权限。
+#!desc=解密改写本机会员信息与 Perms.hideAd 广告横幅显示；至尊等级从 vip/get 的 Levels 识别，不修改服务端权限。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!tag=minky
