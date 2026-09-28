@@ -22,18 +22,33 @@
       $done({}); return;
     }
     const expiry = 2051193600; // 2035-01-01 00:00 +08:00，Unix 秒
+    // vip/get 的 Levels 是站点实际等级表；只使用标题含“至尊”的编号，不猜测等级。
+    let level = null;
+    if (endpoint[1] === 'vip/get' && Array.isArray(packet.d.Levels)) {
+      const supreme = packet.d.Levels.filter(item => item && /至尊/.test(String(item.Title || item.Name || '')) && Number.isFinite(Number(item.Level)));
+      const selected = supreme.sort((a, b) => Number(b.Level) - Number(a.Level))[0];
+      if (selected) {
+        level = Number(selected.Level);
+        $persistentStore.write(String(level), 'dxweb_vip_supreme_level');
+        console.log(PREFIX + '从 Levels 识别至尊等级=' + level);
+      }
+    }
+    if (level === null) {
+      const saved = $persistentStore.read('dxweb_vip_supreme_level');
+      if (saved !== null && saved !== undefined && saved !== '' && Number.isFinite(Number(saved))) level = Number(saved);
+    }
+    function applyMember(user) {
+      user.IsVip = true;
+      if (level !== null) user.VipLevel = level;
+      user.VipLevelTitle = '至尊会员';
+      user.VipExpireAt = expiry;
+    }
     let changed = false;
     if (endpoint[1] === 'user/info/get') {
-      packet.d.IsVip = true;
-      packet.d.VipLevel = 1;
-      packet.d.VipLevelTitle = 'VIP会员（本地展示）';
-      packet.d.VipExpireAt = expiry;
+      applyMember(packet.d);
       changed = true;
     } else if (packet.d.UserInfo && typeof packet.d.UserInfo === 'object') {
-      packet.d.UserInfo.IsVip = true;
-      packet.d.UserInfo.VipLevel = 1;
-      packet.d.UserInfo.VipLevelTitle = 'VIP会员（本地展示）';
-      packet.d.UserInfo.VipExpireAt = expiry;
+      applyMember(packet.d.UserInfo);
       changed = true;
     }
     if (!changed) {
