@@ -1,11 +1,13 @@
 #!name=FanApp 会员信息
-#!desc=仅修改 getUserInfo 响应的 results.isVip 与 results.deadTime，其他字段保持原样；仅影响本机显示，不更改服务器权益。
+#!desc=getUserInfo 会员信息改写；getUserRelate 剧集 openState 可自行填写，seriesNum 同步为 seriesNumAll。仅影响本机响应。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!tag=minky
+#!input = openState
 
 [Script]
 http-response ^https:\/\/zfs\.601book\.com\/api\/fastApp\/member\/getUserInfo(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/fanapp_vip.js, requires-body=true, timeout=60, tag=FanApp 会员信息
+http-response ^https:\/\/zfs\.601book\.com\/api\/fastApp\/member\/getUserRelate(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/fanapp_relate.js, requires-body=true, timeout=60, tag=FanApp 剧集状态
 
 [Mitm]
 hostname = zfs.601book.com
