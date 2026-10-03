@@ -1,0 +1,11 @@
+#!name=FanApp 会员信息
+#!desc=仅修改 getUserInfo 响应的 results.isVip 与 results.deadTime，其他字段保持原样；仅影响本机显示，不更改服务器权益。
+#!author=Minky
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!tag=minky
+
+[Script]
+http-response ^https:\/\/zfs\.601book\.com\/api\/fastApp\/member\/getUserInfo(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/fanapp_vip.js, requires-body=true, timeout=60, tag=FanApp 会员信息
+
+[Mitm]
+hostname = zfs.601book.com
