@@ -12,6 +12,8 @@
 // 按接口区分订阅日期和资料中的手动会员字段，保留日期的月日、时间及时区。
 const body = JSON.parse($response.body);
 if (body.code === 0) {
+  // 将两个接口的会员来源固定为人工发放。
+  body.data.membershipSource = "MANUAL";
   if (/\/user\/updateProfile(?:\?|$)/.test($request.url)) {
     body.data.manualProType = "MONTHLY";
     body.data.manualProExpireAt = body.data.manualProExpireAt.replace(/^\d{4}-/, "2099-");
