@@ -1,5 +1,5 @@
 #!name=VirPulse 订阅日期
-#!desc=到期年份调整为 2099，会员来源固定为 MANUAL，Pro 权限固定为 true，订阅及手动会员类型固定为 YEARLY（测试值）。
+#!desc=到期年份调整为 2099，会员来源固定为 MANUAL，Pro 权限固定为 true，会员类型可在插件设置中选择。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ed/c3/25/edc325ea-2c7c-8a1f-6b04-458e7fa09bcf/AppIcon-0-0-1x_U007ephone-0-0-0-1-0-0-85-220.png/512x512bb.jpg
@@ -13,8 +13,11 @@
 # 6. 如任何单位或个人认为本脚本可能侵犯其合法权益，请提供有效身份证明和权属证明并联系处理；核实后将及时删除或调整相关内容。
 # 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 
+[Argument]
+membershipType = select,"MONTHLY","YEARLY","ANNUAL","LIFETIME","PERMANENT",tag=会员类型,desc=同步设置 subscriptionType、membershipType 和 manualProType；除 MONTHLY 外均为待验证值
+
 [Script]
-http-response ^https:\/\/www\.kaisir\.cn\/virpulse-api\/user\/(?:subscription|updateProfile)(?:\?|$) script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/virpulse_subscription.js, requires-body=true, timeout=60, tag=VirPulse 订阅日期
+http-response ^https:\/\/www\.kaisir\.cn\/virpulse-api\/user\/(?:subscription|updateProfile)(?:\?|$) script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/virpulse_subscription.js, requires-body=true, argument=[{membershipType}], timeout=60, tag=VirPulse 订阅日期
 
 [Mitm]
 hostname = www.kaisir.cn

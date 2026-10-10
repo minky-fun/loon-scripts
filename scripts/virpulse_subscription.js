@@ -11,20 +11,22 @@
 
 // 按接口区分订阅日期和资料中的手动会员字段，保留日期的月日、时间及时区。
 const body = JSON.parse($response.body);
+// 读取 Loon 插件设置中选择的会员类型。
+const membershipType = $argument.membershipType;
 if (body.code === 0) {
   // 将两个接口的会员来源固定为人工发放。
   body.data.membershipSource = "MANUAL";
   if (/\/user\/updateProfile(?:\?|$)/.test($request.url)) {
-    body.data.manualProType = "YEARLY";
+    body.data.manualProType = membershipType;
     body.data.manualProExpireAt = body.data.manualProExpireAt.replace(/^\d{4}-/, "2099-");
   } else if (/\/user\/subscription(?:\?|$)/.test($request.url)) {
     // 固定订阅摘要中的 Pro 身份、功能权限和会员有效状态。
     body.data.pro = true;
     body.data.proAccess = true;
     body.data.membershipActive = true;
-    // 按用户指定的 YEARLY 值测试年度套餐类型。
-    body.data.subscriptionType = "YEARLY";
-    body.data.membershipType = "YEARLY";
+    // 将订阅摘要的套餐类型同步为插件所选值。
+    body.data.subscriptionType = membershipType;
+    body.data.membershipType = membershipType;
     body.data.subscriptionExpireAt = body.data.subscriptionExpireAt.replace(/^\d{4}-/, "2099-");
   }
   $done({ body: JSON.stringify(body) });
