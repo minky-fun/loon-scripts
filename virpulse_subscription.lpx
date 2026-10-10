@@ -1,5 +1,5 @@
 #!name=VirPulse 订阅日期
-#!desc=将订阅及资料响应中的到期年份调整为 2099，会员来源固定为 MANUAL，资料响应的手动会员类型固定为 MONTHLY。
+#!desc=到期年份调整为 2099，会员来源固定为 MANUAL，订阅响应的 pro、proAccess、membershipActive 固定为 true，资料响应的手动会员类型固定为 MONTHLY。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ed/c3/25/edc325ea-2c7c-8a1f-6b04-458e7fa09bcf/AppIcon-0-0-1x_U007ephone-0-0-0-1-0-0-85-220.png/512x512bb.jpg

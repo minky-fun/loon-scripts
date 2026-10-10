@@ -18,6 +18,10 @@ if (body.code === 0) {
     body.data.manualProType = "MONTHLY";
     body.data.manualProExpireAt = body.data.manualProExpireAt.replace(/^\d{4}-/, "2099-");
   } else if (/\/user\/subscription(?:\?|$)/.test($request.url)) {
+    // 固定订阅摘要中的 Pro 身份、功能权限和会员有效状态。
+    body.data.pro = true;
+    body.data.proAccess = true;
+    body.data.membershipActive = true;
     body.data.subscriptionExpireAt = body.data.subscriptionExpireAt.replace(/^\d{4}-/, "2099-");
   }
   $done({ body: JSON.stringify(body) });
