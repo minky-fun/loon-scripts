@@ -1,5 +1,5 @@
 #!name=VirPulse 订阅日期
-#!desc=将订阅响应中的到期年份调整为 2099，保留原月日和时间。
+#!desc=将订阅及资料响应中的到期年份调整为 2099，资料响应的手动会员类型固定为 MONTHLY。
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png
@@ -14,7 +14,7 @@
 # 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 
 [Script]
-http-response ^https:\/\/www\.kaisir\.cn\/virpulse-api\/user\/subscription(?:\?|$) script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/virpulse_subscription.js, requires-body=true, timeout=60, tag=VirPulse 订阅日期
+http-response ^https:\/\/www\.kaisir\.cn\/virpulse-api\/user\/(?:subscription|updateProfile)(?:\?|$) script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/virpulse_subscription.js, requires-body=true, timeout=60, tag=VirPulse 订阅日期
 
 [Mitm]
 hostname = www.kaisir.cn

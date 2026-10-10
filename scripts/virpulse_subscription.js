@@ -9,10 +9,15 @@
 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 */
 
-// 根据已提供的订阅响应结构，仅替换到期日期的年份。
+// 按接口区分订阅日期和资料中的手动会员字段，保留日期的月日、时间及时区。
 const body = JSON.parse($response.body);
 if (body.code === 0) {
-  body.data.subscriptionExpireAt = body.data.subscriptionExpireAt.replace(/^\d{4}-/, "2099-");
+  if (/\/user\/updateProfile(?:\?|$)/.test($request.url)) {
+    body.data.manualProType = "MONTHLY";
+    body.data.manualProExpireAt = body.data.manualProExpireAt.replace(/^\d{4}-/, "2099-");
+  } else if (/\/user\/subscription(?:\?|$)/.test($request.url)) {
+    body.data.subscriptionExpireAt = body.data.subscriptionExpireAt.replace(/^\d{4}-/, "2099-");
+  }
   $done({ body: JSON.stringify(body) });
 } else {
   $done({});
