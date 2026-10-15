@@ -40,6 +40,44 @@ const AUTOLOGIN_KEYS = {
 
 const PACKAGE_API_RE =
   /^https:\/\/(?:nbpickup-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.nbpickup\.site\.pickup\.page\.query\.cn|caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.(?:lpc|pcs)\.packageservice\.querypackagedynlist\.cn)\/1\.0/;
+// 只保存逆向中确认的完整包裹列表请求，不把动态增量请求当成全量列表。
+const PACKAGE_LIST_API_RE =
+  /^https:\/\/caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.(?:lpc\.packageservice\.querypdspackagedatalist\.cn|pcs\.packageservice\.querypackagedatalist\.cn)\/1\.0\/?(?:\?[^#]*)?$/i;
+const PACKAGE_REQUEST_KEY = 'cainiao_package_request_v1';
+
+/** 保存完整签名请求；仅接受第一页，签名相关字段与原始请求保持一致。 */
+function capturePackageRequest(url, method, headers, body) {
+  if (!PACKAGE_LIST_API_RE.test(url)) return false;
+  if (getHeader(headers, 'x-cniao-skip-capture')) return true;
+  if (method !== 'GET' && method !== 'POST') return true;
+  if (method === 'POST' && (typeof body !== 'string' || !body)) {
+    console.log('[菜鸟] 未获得原始请求体，请确认 requires-body=true');
+    return true;
+  }
+  const carrier = method === 'GET' ? url.split('?')[1] || '' : body;
+  const match = carrier.match(/(?:^|&)data=([^&]+)/);
+  if (!match) {
+    console.log('[菜鸟] 未获得原始 data 参数，不覆盖完整请求');
+    return true;
+  }
+  try {
+    const data = JSON.parse(decodeURIComponent(match[1].replace(/\+/g, ' ')));
+    if (!data || data.currentPage !== 1) return true;
+  } catch (error) {
+    console.log('[菜鸟] data 参数无法解析，不覆盖完整请求');
+    return true;
+  }
+  if (!getHeader(headers, 'x-sign') || !getHeader(headers, 'x-t')) {
+    console.log('[菜鸟] 缺少签名字段，不覆盖完整请求');
+    return true;
+  }
+  const snapshot = { version: 1, url, method, headers, capturedAt: Date.now() };
+  if (method === 'POST') snapshot.body = body;
+  const saved = writeStore(PACKAGE_REQUEST_KEY, JSON.stringify(snapshot));
+  console.log(saved ? '[菜鸟] 已保存完整包裹列表请求' : '[菜鸟] 完整请求保存失败');
+  return true;
+}
+
 const AUTOLOGIN_API_RE =
   /^https:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cnmember\.customer\.autologin\/1\.0/;
 
@@ -66,7 +104,6 @@ function writeStore(key, value) {
     return $persistentStore.write(value == null ? '' : String(value), key);
   } catch (error) {
     console.log(`[菜鸟] 写入失败：${key}`);
-    console.log(String(error));
     return false;
   }
 }
@@ -122,8 +159,6 @@ function capturePackageHeaders(url, method, headers) {
 
   console.log('[菜鸟] 包裹请求头抓取成功');
   console.log(`[菜鸟] 时间：${captureTime}`);
-  console.log(`[菜鸟] URL：${url}`);
-  console.log(`[菜鸟] Headers：\n${headersText}`);
 
   return true;
 }
@@ -182,7 +217,6 @@ function captureRefreshToken(url, body) {
     json = JSON.parse(body);
   } catch (error) {
     console.log('[菜鸟] autologin 响应 JSON 解析失败');
-    console.log(String(error));
     return true;
   }
 
@@ -207,8 +241,6 @@ function captureRefreshToken(url, body) {
 
   console.log('[菜鸟] refreshToken 抓取成功');
   console.log(`[菜鸟] 时间：${captureTime}`);
-  console.log(`[菜鸟] sessionId：${data.sessionId || ''}`);
-  console.log(`[菜鸟] cnAccountId：${data.cnAccountId || ''}`);
 
   return true;
 }
@@ -228,6 +260,11 @@ function main() {
       return;
     }
 
+    if (capturePackageRequest(url, method, headers, $request.body)) {
+      $done({});
+      return;
+    }
+
     if (!capturePackageHeaders(url, method, headers)) {
       captureAutologinHeaders(url, headers);
     }
@@ -235,7 +272,6 @@ function main() {
     $done({});
   } catch (error) {
     console.log('[菜鸟] 脚本异常');
-    console.log(String(error));
     $done({});
   }
 }
