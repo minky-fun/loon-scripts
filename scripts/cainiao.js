@@ -45,35 +45,53 @@ const PACKAGE_LIST_API_RE =
   /^https:\/\/caps-mtop\.cainiao\.com\/gw\/mtop\.cainiao\.(?:lpc\.packageservice\.querypdspackagedatalist\.cn|pcs\.packageservice\.querypackagedatalist\.cn)\/1\.0\/?(?:\?[^#]*)?$/i;
 const PACKAGE_REQUEST_KEY = 'cainiao_package_request_v1';
 
+/** 只保存抓取阶段和 API 名称，供组件诊断；不记录 URL 参数或凭据。 */
+function recordCaptureStatus(state, url) {
+  const match = url.match(/\/gw\/(mtop\.[a-z0-9.]+)\//i);
+  if (!match) return;
+  writeStore('cainiao_capture_status_v1', JSON.stringify({
+    version: 1, scriptVersion: '1.2.1', state, api: match[1], capturedAt: Date.now(),
+  }));
+}
+
 /** 保存完整签名请求；仅接受第一页，签名相关字段与原始请求保持一致。 */
 function capturePackageRequest(url, method, headers, body) {
   if (!PACKAGE_LIST_API_RE.test(url)) return false;
   if (getHeader(headers, 'x-cniao-skip-capture')) return true;
   if (method !== 'GET' && method !== 'POST') return true;
   if (method === 'POST' && (typeof body !== 'string' || !body)) {
+    recordCaptureStatus('body_missing', url);
     console.log('[菜鸟] 未获得原始请求体，请确认 requires-body=true');
     return true;
   }
   const carrier = method === 'GET' ? url.split('?')[1] || '' : body;
   const match = carrier.match(/(?:^|&)data=([^&]+)/);
   if (!match) {
+    recordCaptureStatus('data_missing', url);
     console.log('[菜鸟] 未获得原始 data 参数，不覆盖完整请求');
     return true;
   }
   try {
     const data = JSON.parse(decodeURIComponent(match[1].replace(/\+/g, ' ')));
-    if (!data || data.currentPage !== 1) return true;
+    if (!data || data.currentPage !== 1) {
+      recordCaptureStatus('page_not_first', url);
+      console.log('[菜鸟] 不是第一页请求，未保存完整列表');
+      return true;
+    }
   } catch (error) {
+    recordCaptureStatus('data_invalid', url);
     console.log('[菜鸟] data 参数无法解析，不覆盖完整请求');
     return true;
   }
   if (!getHeader(headers, 'x-sign') || !getHeader(headers, 'x-t')) {
+    recordCaptureStatus('signature_missing', url);
     console.log('[菜鸟] 缺少签名字段，不覆盖完整请求');
     return true;
   }
   const snapshot = { version: 1, url, method, headers, capturedAt: Date.now() };
   if (method === 'POST') snapshot.body = body;
   const saved = writeStore(PACKAGE_REQUEST_KEY, JSON.stringify(snapshot));
+  recordCaptureStatus(saved ? 'captured' : 'storage_failed', url);
   console.log(saved ? '[菜鸟] 已保存完整包裹列表请求' : '[菜鸟] 完整请求保存失败');
   return true;
 }
@@ -139,6 +157,7 @@ function capturePackageHeaders(url, method, headers) {
     return false;
   }
 
+  recordCaptureStatus('legacy_request', url);
   const captureTime = getNowText();
   const headersText = formatHeaders(headers);
 
@@ -158,6 +177,7 @@ function capturePackageHeaders(url, method, headers) {
   writeStore(PACKAGE_KEYS.lastCaptureTime, captureTime);
 
   console.log('[菜鸟] 包裹请求头抓取成功');
+  console.log('[菜鸟] 当前为动态或取件页接口，未保存完整包裹列表请求');
   console.log(`[菜鸟] 时间：${captureTime}`);
 
   return true;
