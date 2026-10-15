@@ -184,14 +184,14 @@ function capturePackageHeaders(url, method, headers) {
 }
 
 /**
- * 抓取 autologin 请求头和 URL 里的 data 参数。
+ * 抓取 autologin 请求头及 GET 查询参数或 POST 表单中的原始 data。
  */
-function captureAutologinHeaders(url, headers) {
+function captureAutologinHeaders(url, headers, body, method) {
   if (!AUTOLOGIN_API_RE.test(url)) {
     return false;
   }
 
-  if (headers['x-cniao-skip-capture']) {
+  if (getHeader(headers, 'x-cniao-skip-capture')) {
     console.log('[菜鸟] 小组件请求，跳过 autologin 请求头抓取');
     return true;
   }
@@ -207,9 +207,11 @@ function captureAutologinHeaders(url, headers) {
 
   writeStore(AUTOLOGIN_KEYS.headersJson, JSON.stringify(cleaned));
 
-  const dataMatch = url.match(/[?&]data=([^&]+)/);
+  const query = url.split('?')[1] || '';
+  const carrier = /(?:^|&)data=/.test(query) ? query : method === 'POST' ? body : query;
+  const dataMatch = typeof carrier === 'string' ? carrier.match(/(?:^|&)data=([^&]+)/) : null;
   if (dataMatch) {
-    writeStore(AUTOLOGIN_KEYS.data, decodeURIComponent(dataMatch[1]));
+    writeStore(AUTOLOGIN_KEYS.data, decodeURIComponent(dataMatch[1].replace(/\+/g, ' ')));
     console.log('[菜鸟] autologin data 参数已保存');
   }
 
@@ -220,12 +222,14 @@ function captureAutologinHeaders(url, headers) {
 }
 
 /**
- * 抓取 autologin 响应里的 refreshToken 和账号字段。
+ * 记录 App 续期响应，并将同一请求的 data 更新为轮换后的 token；跳过组件请求。
  */
-function captureRefreshToken(url, body) {
+function captureRefreshToken(url, body, requestHeaders, requestBody, method) {
   if (!AUTOLOGIN_API_RE.test(url)) {
     return false;
   }
+
+  if (getHeader(requestHeaders, 'x-cniao-skip-capture')) return true;
 
   if (!body) {
     console.log('[菜鸟] autologin 响应体为空，请确认 requires-body=true');
@@ -240,15 +244,36 @@ function captureRefreshToken(url, body) {
     return true;
   }
 
+  if (!Array.isArray(json.ret) || !json.ret.length || !json.ret.every(value => typeof value === 'string' && value.split('::')[0] === 'SUCCESS')) {
+    console.log('[菜鸟] autologin 未成功，保留现有续期数据');
+    return true;
+  }
+
   const data = json && json.data && json.data.data ? json.data.data : {};
   const ext = data && data.ext ? data.ext : {};
   const refreshToken = data.refreshToken || '';
 
-  if (!refreshToken) {
+  if (typeof refreshToken !== 'string' || !refreshToken) {
     console.log('[菜鸟] 未找到 refreshToken');
     return true;
   }
 
+  // 直接关联当前 App 请求与响应，避免把轮换 token 拼入其他账号的旧 data。
+  const query = url.split('?')[1] || '';
+  const carrier = /(?:^|&)data=/.test(query) ? query : method === 'POST' ? requestBody : query;
+  const dataMatch = typeof carrier === 'string' ? carrier.match(/(?:^|&)data=([^&]+)/) : null;
+  if (dataMatch) {
+    try {
+      const payload = JSON.parse(decodeURIComponent(dataMatch[1].replace(/\+/g, ' ')));
+      if (payload && typeof payload === 'object' && !Array.isArray(payload) && typeof payload.refreshToken === 'string') {
+        payload.refreshToken = refreshToken;
+        writeStore(AUTOLOGIN_KEYS.data, JSON.stringify(payload));
+        console.log('[菜鸟] App 续期数据已更新为本次响应 token');
+      }
+    } catch (error) {
+      console.log('[菜鸟] App 续期 data 无法解析，保留原始数据');
+    }
+  }
   const captureTime = getNowText();
 
   writeStore(AUTOLOGIN_KEYS.refreshToken, refreshToken);
@@ -275,7 +300,7 @@ function main() {
     const headers = $request && $request.headers ? $request.headers : {};
 
     if (typeof $response !== 'undefined') {
-      captureRefreshToken(url, $response.body || '');
+      captureRefreshToken(url, $response.body || '', headers, $request.body, method);
       $done({});
       return;
     }
@@ -286,7 +311,7 @@ function main() {
     }
 
     if (!capturePackageHeaders(url, method, headers)) {
-      captureAutologinHeaders(url, headers);
+      captureAutologinHeaders(url, headers, $request.body, method);
     }
 
     $done({});

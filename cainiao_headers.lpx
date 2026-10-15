@@ -1,5 +1,5 @@
 #!name=菜鸟请求头抓取
-#!desc=1.2.1 保存完整包裹列表签名请求与脱敏抓取状态；保留旧抓取键
+#!desc=1.2.2 保留原有包裹抓取；修复 autologin 表单抓取及 App token 轮换同步
 #!author=Minky
 #!homepage=https://github.com/minky-fun/loon-scripts
 #!icon=https://pp.myapp.com/ma_icon/0/icon_11551760_1777010595/256
