@@ -1,5 +1,5 @@
 #!name=菜鸟请求头抓取
-#!desc=1.2.2 保留原有包裹抓取；修复 autologin 表单抓取及 App token 轮换同步
+#!desc=1.2.3 保留原有包裹抓取；修复原生 autoLoginRequest 内嵌 token 轮换
 #!author=Minky
 #!icon=https://pp.myapp.com/ma_icon/0/icon_11551760_1777010595/256
 #!tag=minky

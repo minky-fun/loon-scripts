@@ -50,7 +50,7 @@ function recordCaptureStatus(state, url) {
   const match = url.match(/\/gw\/(mtop\.[a-z0-9.]+)\//i);
   if (!match) return;
   writeStore('cainiao_capture_status_v1', JSON.stringify({
-    version: 1, scriptVersion: '1.2.1', state, api: match[1], capturedAt: Date.now(),
+    version: 1, scriptVersion: '1.2.3', state, api: match[1], capturedAt: Date.now(),
   }));
 }
 
@@ -265,8 +265,17 @@ function captureRefreshToken(url, body, requestHeaders, requestBody, method) {
   if (dataMatch) {
     try {
       const payload = JSON.parse(decodeURIComponent(dataMatch[1].replace(/\+/g, ' ')));
-      if (payload && typeof payload === 'object' && !Array.isArray(payload) && typeof payload.refreshToken === 'string') {
-        payload.refreshToken = refreshToken;
+      if (payload && typeof payload === 'object' && !Array.isArray(payload)) {
+        // 原生 LoginService 将 AutoLoginRequest 序列化后放入 autoLoginRequest 字符串。
+        const nested = typeof payload.autoLoginRequest === 'string';
+        const request = nested ? JSON.parse(payload.autoLoginRequest) : payload;
+        if (!request || typeof request !== 'object' || Array.isArray(request) || typeof request.refreshToken !== 'string' || !request.refreshToken.trim()) {
+          console.log('[菜鸟] App 续期 data 缺少 refreshToken，保留原始数据');
+          return true;
+        }
+        request.refreshToken = refreshToken;
+        if ('accountId' in request && (typeof data.cnAccountId === 'string' || typeof data.cnAccountId === 'number')) request.accountId = data.cnAccountId;
+        if (nested) payload.autoLoginRequest = JSON.stringify(request);
         writeStore(AUTOLOGIN_KEYS.data, JSON.stringify(payload));
         console.log('[菜鸟] App 续期数据已更新为本次响应 token');
       }
