@@ -1,0 +1,29 @@
+#!name=腾讯视频净化
+#!author=TG@ZenMoFiShi, Minky（Loon 适配）
+#!update=2026-10-27
+#!desc=去除开屏广告、播放前广告、底部多余标签栏，精简我的页面及顶部广告。需开启 HTTPS 解密并信任证书，实际效果以客户端版本为准。
+#!homepage=https://github.com/minky-fun/loon-scripts
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Loon.png
+
+# 免责声明：
+# 1. 本脚本仅供学习、研究与技术交流使用，不保证其合法性、准确性、有效性或适用性，请自行判断并承担使用风险。
+# 2. 本脚本仅供临时学习研究，下载或使用后请于 24 小时内从您的计算机、手机或其他存储设备中删除；因未及时删除或继续使用所产生的一切后果由使用者自行承担。
+# 3. 请勿将本脚本用于任何商业用途、非法用途或侵犯第三方权益的行为；如违反相关规定，责任由使用者自行承担。
+# 4. 本脚本涉及的应用、平台或服务均与本人无关；因使用本脚本导致的账号异常、隐私泄露、数据丢失或其他后果，本人不承担任何责任。
+# 5. 本人不对脚本运行结果作任何承诺，也不承担因脚本错误、接口变更、使用不当等原因造成的任何直接或间接损失。
+# 6. 如任何单位或个人认为本脚本可能侵犯其合法权益，请提供有效身份证明和权属证明并联系处理；核实后将及时删除或调整相关内容。
+# 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
+
+[Rule]
+DOMAIN,iacc.stgw.qq.com,REJECT
+DOMAIN,tacc.video.qq.com,REJECT
+
+[Script]
+http-request ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/tencent_video_clean.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频广告请求
+http-response ^https?:\/\/i\.video\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/tencent_video_clean.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频页面净化
+http-response ^https?:\/\/iacc\.qq\.com\/(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/tencent_video_clean.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频播放广告
+http-response ^https?:\/\/config\.ab\.qq\.com\/tab\/GetTabRemoteConfig(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/tencent_video_clean.js, requires-body=true, binary-body-mode=true, timeout=10, tag=腾讯视频底栏配置
+http-response ^https:\/\/rdelivery\.qq\.com\/v1\/sdkconfig\/get(?:\?.*)?$ script-path=https://raw.githubusercontent.com/minky-fun/loon-scripts/main/scripts/tencent_video_clean.js, requires-body=true, binary-body-mode=false, timeout=10, tag=腾讯视频灰度配置
+
+[Mitm]
+hostname = i.video.qq.com, iacc.qq.com, config.ab.qq.com, rdelivery.qq.com
