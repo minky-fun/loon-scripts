@@ -9,15 +9,20 @@
 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 */
 
-// 仅处理红果 App 的请求参数，避免保存同域其他应用的安装号。
+// 仅从已配置的红果接口域名读取安装号，不要求请求同时携带 aid。
 try {
   const request = new URL($request.url);
-  const aid = request.searchParams.get("aid");
   const iid = request.searchParams.get("iid");
-  if (aid === "8662" && iid && /^[1-9][0-9]{0,31}$/.test(iid)) {
+  if (iid && /^[1-9][0-9]{0,31}$/.test(iid)) {
     const key = "hongguo_iid_capture_v1";
-    if ($persistentStore.read(key) !== iid && $persistentStore.write(iid, key)) {
+    const previous = $persistentStore.read(key);
+    const changed = previous !== iid;
+    const saved = !changed || $persistentStore.write(iid, key);
+    const noticeKey = "hongguo_iid_notice_time_v1";
+    const lastNotice = Number($persistentStore.read(noticeKey) || 0);
+    if (saved && (changed || Date.now() - lastNotice > 300000)) {
       $notification.post("红果 iid 已抓到", "点击通知复制安装号", "尾号 " + iid.slice(-6), { clipboard: iid });
+      $persistentStore.write(String(Date.now()), noticeKey);
     }
   }
 } catch (error) {
