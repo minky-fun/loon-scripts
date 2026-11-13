@@ -9,11 +9,11 @@
 7. 凡直接或间接使用、查看、复制或传播本脚本者，均视为已阅读、理解并接受本免责声明；本人保留随时修改或补充本声明的权利。
 */
 
-// 仅从已配置的红果接口域名读取安装号，不要求请求同时携带 aid。
+// 仅从已配置的红果接口域名读取安装号，不依赖运行时的 URL 解析器。
 try {
-  const request = new URL($request.url);
-  const iid = request.searchParams.get("iid");
-  if (iid && /^[1-9][0-9]{0,31}$/.test(iid)) {
+  const match = $request.url.match(/[?&]iid=([1-9][0-9]{0,31})(?:[&#]|$)/);
+  if (match) {
+    const iid = match[1];
     const key = "hongguo_iid_capture_v1";
     const previous = $persistentStore.read(key);
     const changed = previous !== iid;
